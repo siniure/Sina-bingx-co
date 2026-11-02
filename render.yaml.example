@@ -1,0 +1,18 @@
+# REVIEW TEMPLATE ONLY: not deployed or approved for paid resource creation.
+# Put the contents of this package at the root of the eventual Git repository.
+# A verified Standard collector must later supply the snapshot; it is not bundled.
+previews:
+  generation: "off"
+services:
+  - type: worker
+    name: sina-oco-research
+    runtime: python
+    plan: 0.5c-512mb
+    buildCommand: python -m unittest discover -s tests -q
+    startCommand: python -m oco worker --data-dir /var/data/oco --snapshot /var/data/oco/input.json --interval 5
+    autoDeployTrigger: "off"
+    maxShutdownDelaySeconds: 30
+    disk:
+      name: oco-journal
+      mountPath: /var/data
+      sizeGB: 1

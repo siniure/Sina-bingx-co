@@ -1,0 +1,384 @@
+{
+  "version": "0.4.1",
+  "prepared_at_istanbul": "2026-11-02T22:34:43.984648+03:00",
+  "live_publication": false,
+  "tests_passed": 118,
+  "files": {
+    ".github/workflows/android-build.yml": {
+      "bytes": 3084,
+      "sha256": "e6f88cc99eb47561f09a15275bc3872609b2a978ebed47ad27041dab5d71962c"
+    },
+    ".github/workflows/ios-build.yml": {
+      "bytes": 779,
+      "sha256": "51a3f7157293215def53fb762e7a8318be1dfc3da93e75080c1fc8a54dc0f630"
+    },
+    ".github/workflows/windows-test.yml": {
+      "bytes": 2952,
+      "sha256": "5ad2cd93fe09ea66b9ddad546c7df31efd5340adec538359cf2bbc25a81d9595"
+    },
+    ".gitignore": {
+      "bytes": 194,
+      "sha256": "acdf8c23802aeee19840f6a5ff9c95ef1d6933aeb9921bcd2ac8c9121db2aefd"
+    },
+    "AGREEMENT_AMENDMENT_FA.md": {
+      "bytes": 10142,
+      "sha256": "d88a83f80536e84f015f96ed1f53646e94482c7879f18dbca029db8dcf08ce1a"
+    },
+    "AGREEMENT_AUTOMATION_MATRIX_FA.md": {
+      "bytes": 3572,
+      "sha256": "fa638e4788c5579628b21bd4698398d045afc01eccbd9928485cd68951e3657b"
+    },
+    "AUDIT_REPORT_FA.md": {
+      "bytes": 6056,
+      "sha256": "d3d0b1ac95b146212f95c7274ced9a807024707e1ad9652d3ae0e0598c6baedf"
+    },
+    "CORE_README_FA.md": {
+      "bytes": 8804,
+      "sha256": "ebffb011c005baf0eec4bb48adfbf0efee3ee3340294c7170167701126fb0d78"
+    },
+    "HANDOFF_UPDATE_FA.md": {
+      "bytes": 7445,
+      "sha256": "c3d693d6d1f0f22d6f3c7255f1a34aa7854fe5099c0613e57493295d0a77c317"
+    },
+    "INSTALL_GUIDE_FA.md": {
+      "bytes": 33076,
+      "sha256": "e9bad4482e238d212d9b453331f6829402e4e10ffdbfdceda5a1398a94070da8"
+    },
+    "README_FA.md": {
+      "bytes": 7681,
+      "sha256": "0ed39ed59a6eb68d029e0e1489960a7d53b7a1e3428cf5aca878ccf787f153a0"
+    },
+    "SNAPSHOT_CONTRACT_FA.md": {
+      "bytes": 3703,
+      "sha256": "11f907a57181811ada303adc9e9f65f4f5207f27a1731af618824343ab6ed90a"
+    },
+    "SOURCE_RESEARCH_2026-11-02.md": {
+      "bytes": 4648,
+      "sha256": "55a71800599cb22bbeef8dc3c3e2b58778d8448d1e19efff89f0a64b32cf9752"
+    },
+    "STRATEGY_RESEARCH_FA.md": {
+      "bytes": 6993,
+      "sha256": "d505ead7b617b3bf3e8cd70e21e716c04a8fad2cdb02994f354263baf8d7698c"
+    },
+    "TEST_REPORT.txt": {
+      "bytes": 17098,
+      "sha256": "529db98093778a5858502b93e8f82b62fa7b4ffdc5414d2e0c1b1e8970260a81"
+    },
+    "USER_NEXT_STEPS_FA.md": {
+      "bytes": 2767,
+      "sha256": "093f5368ced04c46bb9ad7d9e0264271a32818114d46119e273aeaa5eb635244"
+    },
+    "bingx_standard_guard.py": {
+      "bytes": 9347,
+      "sha256": "8f66e6e73db5acc847bcc9d8cddc166cb1625e9866e3d57baf37c4d515b57f0f"
+    },
+    "clients/android/BUILD_STATUS.json": {
+      "bytes": 633,
+      "sha256": "f6991072034fa588bff3ecb26ecd5c7196353947a8a50e46ca51aaa9f9d0cc1f"
+    },
+    "clients/android/app/build.gradle": {
+      "bytes": 1410,
+      "sha256": "917ed5cdf492ef6ebb1f08d86df1f8f380e6012d704fab06cf75886d505cc694"
+    },
+    "clients/android/app/src/main/AndroidManifest.xml": {
+      "bytes": 699,
+      "sha256": "0b8fff60e33bc715bbaf646c5c23758036a20655306f7f331de9894f3eb1b502"
+    },
+    "clients/android/app/src/main/java/com/sina/oco/MainActivity.java": {
+      "bytes": 4998,
+      "sha256": "b67fa75cda3d2f51fb36e50d189df963e5de37d89a059f0a1581ea95951e3fc7"
+    },
+    "clients/android/build.gradle": {
+      "bytes": 69,
+      "sha256": "048ecfefe09971849fc8c9326de9d0e8af7e50e371aed980e2e1617124bb969f"
+    },
+    "clients/android/gradle.properties": {
+      "bytes": 77,
+      "sha256": "65c8508e4db1e61f18f29d3ded79431d70397238316774859a627f2d29e02bb4"
+    },
+    "clients/android/settings.gradle": {
+      "bytes": 268,
+      "sha256": "1afd03f488691249c208a46c893988458f164073d86c8c057a8c90e1d145f328"
+    },
+    "clients/ios/BUILD_STATUS.json": {
+      "bytes": 548,
+      "sha256": "ba0a247f4ee272b490190ce853861ab44010a327bd3e559911d75750e5894a6e"
+    },
+    "clients/ios/SinaOCO/Info.plist": {
+      "bytes": 862,
+      "sha256": "14571f6d512e5cc01abc21c4a53856dbbc0a2a18ec43b9d46a52a97c582908fe"
+    },
+    "clients/ios/SinaOCO/SinaOCOApp.swift": {
+      "bytes": 3142,
+      "sha256": "7ea10941c11734aff2b05a5de516cef07760d7662b42d4c18caa9cdb8c855191"
+    },
+    "clients/ios/SinaOCO.xcodeproj/project.pbxproj": {
+      "bytes": 3658,
+      "sha256": "3dcda1780e6ad3775499d6f48d96ade97e564d1b7bb0704faa4ea5e69b51f631"
+    },
+    "clients/ios/SinaOCO.xcodeproj/xcshareddata/xcschemes/SinaOCO.xcscheme": {
+      "bytes": 1772,
+      "sha256": "57a7e362b6a27d2f4e1bd21be56eae54b8eaa789a59b1d475337f1327780b75f"
+    },
+    "clients/windows/Install.ps1": {
+      "bytes": 6840,
+      "sha256": "611d39802d8e07e5170cc5154c776f4cbc9091271b0c582b614e319dd4b29ab9"
+    },
+    "clients/windows/Sign-Installer.ps1": {
+      "bytes": 2287,
+      "sha256": "07012ab47dc4fd19635c8716cd2d89981c517119c199523cae225f1a4c1b2ba5"
+    },
+    "clients/windows/Uninstall.ps1": {
+      "bytes": 1694,
+      "sha256": "5adfbc10ad25ae973238e0fffc70e431179570ec441b755e268c77b1dfeaacab"
+    },
+    "clients/windows/bootstrap.c": {
+      "bytes": 4858,
+      "sha256": "f6ac664506b502de1b6a3a5f6acdbdd6def9feac6e774b7d479ca0ae74e75064"
+    },
+    "config/deployment_status.json": {
+      "bytes": 5709,
+      "sha256": "c63fde5592761da0dcb89129b3b91a86f63d0e47220555636dc9664ed68eecca"
+    },
+    "config/strategy.research.json": {
+      "bytes": 406,
+      "sha256": "16db6c0aba8f8e7c85023943ad1521159a681e31dc9b5ed855ca0f4e89457e71"
+    },
+    "core.py": {
+      "bytes": 18212,
+      "sha256": "64872d96f405989a76f64e4838f6222b3c49690e4593e41a0e8f0e7c1de02ddd"
+    },
+    "docs/baseline_v2/README_FA.md": {
+      "bytes": 9926,
+      "sha256": "45c9b0cc9f6dc4a43a0e05715a8620a5a5b9b70dbd8147fa3cc8d54e3e1bc4cf"
+    },
+    "docs/baseline_v2/TEST_REPORT.txt": {
+      "bytes": 5840,
+      "sha256": "c4bd3755b540dd2d5c9cd7f69719d57be613a33dd909f01f238ed9552f6e89eb"
+    },
+    "docs/baseline_v2/USER_NEXT_STEPS_FA.md": {
+      "bytes": 7224,
+      "sha256": "166582510360fb5cf399078c32864cecf5b20c6341160bc1fabb3928670469fb"
+    },
+    "docs/baseline_v2/deployment_status.json": {
+      "bytes": 2089,
+      "sha256": "db70a7c084d69de3fa3b232cc86156a253e3a3e40a648ab5cafa469601d9d050"
+    },
+    "docs/baseline_v3/HANDOFF_UPDATE_FA.md": {
+      "bytes": 6632,
+      "sha256": "88171f92f2ff9792dcbdb3d6c3f31ee35fcd604e97f19f23a4a97e43bf488797"
+    },
+    "docs/baseline_v3/MANIFEST_V3.json": {
+      "bytes": 5874,
+      "sha256": "b282fdf4593d4398566ca74f9ad80f6cb0113882b905146c20b939eb7fbf7811"
+    },
+    "docs/baseline_v3/README_FA.md": {
+      "bytes": 5894,
+      "sha256": "43a8ccab9be1e6e27dec154969c59cf4132626ff0cc250d8aa9611341d10c8fe"
+    },
+    "docs/baseline_v3/TEST_REPORT.txt": {
+      "bytes": 7273,
+      "sha256": "d1cf083212085f911443b5801e2583004b3e656d069de0bfe0d1e4960773a6b6"
+    },
+    "docs/baseline_v3/deployment_status.json": {
+      "bytes": 3314,
+      "sha256": "471c1deaa33ce6ca0bd692c8ae60d30bc218cab65c744d17e9cd7081cc86117b"
+    },
+    "docs/baseline_v4/HANDOFF_UPDATE_FA.md": {
+      "bytes": 7439,
+      "sha256": "1d57cf019ba4f897e614513c0554e27a5189b8d5eaa5b91b00127d72fcd9a69d"
+    },
+    "docs/baseline_v4/INSTALL_GUIDE_FA.md": {
+      "bytes": 13816,
+      "sha256": "8f125b2d4c5ef61e1b6fe901c34fc8bf14fa45a0d57f9487f9b5c3e618d0a114"
+    },
+    "docs/baseline_v4/MANIFEST_V4.json": {
+      "bytes": 11644,
+      "sha256": "0f3a97afcea4efe8c3e8d16e52ae9741f09c3f23d8ab06e8e72d275b815db6ce"
+    },
+    "docs/baseline_v4/README_FA.md": {
+      "bytes": 6728,
+      "sha256": "b5aa20f7cd33f5c7b7e06d77128c09a9d54a3d0b6e6b6394cece4b278dce64d6"
+    },
+    "docs/baseline_v4/TEST_REPORT.txt": {
+      "bytes": 10009,
+      "sha256": "a95df0c95af4058e6eb7f890289bb5c535ae6ae1d1052632fca7911a8a0e46cd"
+    },
+    "docs/baseline_v4/USER_NEXT_STEPS_FA.md": {
+      "bytes": 1742,
+      "sha256": "cf78e3d02c92de0b4fab2a2c877348478997070e49825b35699b293b6433042e"
+    },
+    "docs/baseline_v4/deployment_status.json": {
+      "bytes": 4866,
+      "sha256": "f19a6ac34d268c84d5002a36257fb94f1e2da5ea6de9e00e3d370f1860195cb5"
+    },
+    "indicators.py": {
+      "bytes": 9095,
+      "sha256": "a09384f6787616d6f1a29cff62bcf061628e4a234b44f2df7b7dee88b26790e8"
+    },
+    "installers/SinaOCO_Setup_x64.build-status.json": {
+      "bytes": 500,
+      "sha256": "1ce38130890fbfd37b77102f20d603294d374f03b94a1b68420977d7a6621050"
+    },
+    "installers/SinaOCO_Setup_x64.exe": {
+      "bytes": 32397,
+      "sha256": "8fda69ccca546b41b0ef292522d6b468f6ba88eddd1fe246418820a767371c19"
+    },
+    "installers/SinaOCO_Setup_x64.inspection.txt": {
+      "bytes": 5660,
+      "sha256": "029426aa2ddea3f73f4c29b0902eb7fa61f7ca487dd50c5ff726770493a59b10"
+    },
+    "oco/__init__.py": {
+      "bytes": 111,
+      "sha256": "572d4cd139c5a1a993f455d7dc7d62a8504b4c76a840d36ccc0a2d096c4d0177"
+    },
+    "oco/__main__.py": {
+      "bytes": 3125,
+      "sha256": "a982e6fecb72a3dfb72d34060c1d4952b14c5917f7f4787527430096a579f06c"
+    },
+    "oco/demo.py": {
+      "bytes": 3195,
+      "sha256": "1b211b4e5b94bd39409820b8f7223106acf86d7bf5acc2d5d21bfa74b195cb8d"
+    },
+    "oco/engine.py": {
+      "bytes": 2272,
+      "sha256": "f8c1b4246f802ee35f6492b27fe8c5e7b56c027b9d1649aaa9de24e565f5b264"
+    },
+    "oco/formatting.py": {
+      "bytes": 4417,
+      "sha256": "02ce9b0eed14cf0cfa3b115a9003971be3dd4ecea7bac8f801ab686b00af8d8e"
+    },
+    "oco/hub.py": {
+      "bytes": 14195,
+      "sha256": "c7596935f4685f181afee06331985d41d7b025d20e31168b0afcfcc2133d7731"
+    },
+    "oco/journal.py": {
+      "bytes": 9484,
+      "sha256": "98abbba43a851f0c9ee6a2378138f3864b1044d6056a6e22f0d2c44d8f23efb2"
+    },
+    "oco/market.py": {
+      "bytes": 6210,
+      "sha256": "55a0f297325446f28c4d4d9b2ca061382f5a350f2cb79726c398bc0f4304f071"
+    },
+    "oco/risk.py": {
+      "bytes": 7745,
+      "sha256": "74471d96eb4306ffb51f80ed06281478a4f03a6cf0843553bd5d434dd46f448d"
+    },
+    "oco/service.py": {
+      "bytes": 3826,
+      "sha256": "f004febd534c17c766f498846522e72cce5322ae2b4abe6211ce467b297f9e06"
+    },
+    "oco/standard_account.py": {
+      "bytes": 4855,
+      "sha256": "27f9201e124dab4a2af0f5957a4c9e4de2728bda83b175a7bb4b2aea03d439c1"
+    },
+    "oco/strategy.py": {
+      "bytes": 8823,
+      "sha256": "c6f0a592b132b96b6003a3b8f54acf31a684acbdf6ec5f94e7bf4c4254857170"
+    },
+    "oco/telegram_bot.py": {
+      "bytes": 11362,
+      "sha256": "3b876f6015c2cf2b120e98a7fd9cc0153d667d79e89b832b93fa180974816ce9"
+    },
+    "prompts/01_collector_FA.md": {
+      "bytes": 2922,
+      "sha256": "db246bdc7480db9e6a2c4cbd94f37c217f5b65f7a1e490f36e657ee15fdbab4d"
+    },
+    "prompts/02_analyst_FA.md": {
+      "bytes": 3850,
+      "sha256": "e21c96a37f091c722373831504ed86eca17bf0b73a3a306f040c2b99fd030f91"
+    },
+    "prompts/03_reviewer_delivery_FA.md": {
+      "bytes": 3523,
+      "sha256": "b60ea5c1270d4376e954a945f97b26352002989bde1219d1f05bd34a7363101d"
+    },
+    "readiness.sample.json": {
+      "bytes": 415,
+      "sha256": "3bd34fae48e590fcbdae014e9c174e0ec602535b324a6499a2e56348776cba12"
+    },
+    "render.web.yaml.example": {
+      "bytes": 734,
+      "sha256": "60f26a93b5aeeea2780d970f8a05c4931151fefbedc4d9239b497ac8fa39f8c6"
+    },
+    "render.yaml.example": {
+      "bytes": 674,
+      "sha256": "bdcb288b48deb3c9ef20980728663d2e7ae052af685dd90b11b4136d70117ee1"
+    },
+    "scripts/build_windows_installer.py": {
+      "bytes": 8073,
+      "sha256": "f62a4eef3057b290024eb3674c73a0290e09c435a8f9cd11977254775e53a301"
+    },
+    "scripts/check_host.py": {
+      "bytes": 2842,
+      "sha256": "9e35c00371c23461b5f241ef7ee87d5dc7f872e429a3e45e4e68f558d4ddaefd"
+    },
+    "scripts/run_demo.py": {
+      "bytes": 1623,
+      "sha256": "0bc7a77b2f8a501f162d41cd2de4264bac33889a253b1ac3ca109d79cff5c1b1"
+    },
+    "scripts/run_local_hub.py": {
+      "bytes": 1952,
+      "sha256": "50b4ce0b445aca8b08437965d92d0a35e70ef1ec7444eed64df17942f6b6a040"
+    },
+    "scripts/start_hosted.py": {
+      "bytes": 664,
+      "sha256": "07d9cd39389d387cb7444fe99726eab37a46921bc04c715b3b5bd36058fbe245"
+    },
+    "state.json": {
+      "bytes": 69,
+      "sha256": "0e9057d0795e3a564e56afbc18e9257a938491bd672fca381673d0ddfab98324"
+    },
+    "tests/test_core.py": {
+      "bytes": 17825,
+      "sha256": "9a3545f151eb7af548e65ac0fbc3d3e9e6e73b2aca45342fd6edc07145f86dc5"
+    },
+    "tests/test_hub_telegram.py": {
+      "bytes": 14820,
+      "sha256": "d3d534ce4af5efe19bc99310a93437f937e0429ceaab55a5ea5603ed460b2066"
+    },
+    "tests/test_indicators.py": {
+      "bytes": 6108,
+      "sha256": "4a8ceb8ee3f8f18b6d261f3e79d2afdb3b091b3bb07dc5328bcdddd6745a858a"
+    },
+    "tests/test_pipeline.py": {
+      "bytes": 18216,
+      "sha256": "b7b790861973edd1dbc1a6b3ac8537342962d6e62b0e883c0e548756a784ad55"
+    },
+    "tests/test_release_hardening.py": {
+      "bytes": 6875,
+      "sha256": "5a47994134c0f6d38ae84502bd4b30f05977fe083e65d962e16e89e8ab89a066"
+    },
+    "web/app.css": {
+      "bytes": 5023,
+      "sha256": "05507df48abfcb7a3654839ac366e14f1380aa438d0c9fb94c010ac5135d5f07"
+    },
+    "web/app.js": {
+      "bytes": 11410,
+      "sha256": "4785640bdc5bbfd4ce0ce06180cfacc26a30283bb04ea2206dcdb8213644ba82"
+    },
+    "web/icon-192.png": {
+      "bytes": 980,
+      "sha256": "5ba9e05e9aade958a4d05a7785ec475eebfbdad7ddde8e377746a4ee249d5c69"
+    },
+    "web/icon-512.png": {
+      "bytes": 2869,
+      "sha256": "15c771f84dd8b50a60d99b59313370a9aeaf5ca5797e2b80299474e32c765e27"
+    },
+    "web/icon.svg": {
+      "bytes": 369,
+      "sha256": "09cd5c39ce6487b4a035e5603c427af054323d6af8f6b9cab60d65749b80ee3e"
+    },
+    "web/index.html": {
+      "bytes": 5539,
+      "sha256": "66722f862148744f6604dac45a8f9aa535c49340d01bb36d481696df32b1c4be"
+    },
+    "web/manifest.webmanifest": {
+      "bytes": 448,
+      "sha256": "9f6099a24658a9e2a7e91ac9ae9798c5d5edcd5aaf8a3cf6a139f45915d2abb9"
+    },
+    "web/sw.js": {
+      "bytes": 930,
+      "sha256": "72193499df06ee84958fbbc6473ee45940a6795934c79f9a3695a7a02eceabda"
+    }
+  }
+}

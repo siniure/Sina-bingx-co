@@ -1,0 +1,25 @@
+# Proposed deployment only. No account resources have been created.
+# Review workspace, repository, paid compute/disk price, and user approval first.
+previews:
+  generation: "off"
+services:
+  - type: web
+    name: sina-oco-hub
+    runtime: python
+    plan: 0.5c-512mb
+    buildCommand: python -m unittest discover -s tests -q
+    startCommand: python scripts/start_hosted.py
+    autoDeployTrigger: "off"
+    healthCheckPath: /healthz
+    maxShutdownDelaySeconds: 60
+    disk:
+      name: oco-hub-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: SINA_OCO_VIEW_TOKEN
+        generateValue: true
+      - key: SINA_OCO_CONTROL_TOKEN
+        generateValue: true
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false

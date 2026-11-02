@@ -1,0 +1,16 @@
+{
+  "source_verified": false,
+  "real_feed_connected": false,
+  "persistence_verified": false,
+  "delivery_verified": false,
+  "provider": "BingX",
+  "product": "standard_futures",
+  "symbol": "BTCUSDT",
+  "price_kind": "index_price",
+  "cadence_seconds": "5",
+  "delivery_kind": "local_file",
+  "provenance_id": "UNVERIFIED_STANDARD_ADAPTER",
+  "minimum_net_rr": "2",
+  "verified_at": null,
+  "expires_at": null
+}
