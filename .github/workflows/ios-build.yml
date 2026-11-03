@@ -1,0 +1,22 @@
+name: Compile iOS simulator client
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  simulator:
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+      - name: Compile with Xcode without device signing
+        run: >-
+          xcodebuild -project clients/ios/SinaOCO.xcodeproj -scheme SinaOCO
+          -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator'
+          -derivedDataPath build/ios-simulator CODE_SIGNING_ALLOWED=NO build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SinaOCO-Simulator-App-NOT-Device-IPA
+          path: build/ios-simulator/Build/Products/Debug-iphonesimulator/SinaOCO.app
+          if-no-files-found: error
+          retention-days: 7

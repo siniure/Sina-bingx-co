@@ -1,0 +1,66 @@
+name: Build and test Windows installer
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install GNU build tools
+        run: sudo apt-get update && sudo apt-get install -y gcc binutils
+      - name: Test server and build PE installer
+        run: |
+          python -m unittest discover -s tests -v
+          python scripts/build_windows_installer.py --output build/SinaOCO_Setup_x64.exe
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SinaOCO-Windows-Unsigned-Build
+          path: build/SinaOCO_Setup_x64.*
+          if-no-files-found: error
+          retention-days: 7
+  windows:
+    needs: build
+    runs-on: windows-2025
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/download-artifact@v4
+        with:
+          name: SinaOCO-Windows-Unsigned-Build
+          path: build
+      - name: Parse PowerShell sources with the Windows parser
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          foreach ($path in @('clients/windows/Install.ps1', 'clients/windows/Uninstall.ps1', 'clients/windows/Sign-Installer.ps1')) {
+            $tokens = $null; $errors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile((Join-Path (Get-Location) $path), [ref]$tokens, [ref]$errors) | Out-Null
+            if ($errors.Count) { throw ($errors | Out-String) }
+          }
+      - name: Execute actual installer self-test without user AppData changes
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $env:PSExecutionPolicyPreference = $null
+          $env:SINA_OCO_SELF_TEST_LOG = Join-Path (Get-Location) 'build/installer-selftest.log'
+          Get-ExecutionPolicy -List | Out-File -Encoding utf8 build/policy-observed.txt
+          $run = Start-Process -FilePath (Resolve-Path build/SinaOCO_Setup_x64.exe) -ArgumentList '--self-test' -PassThru
+          if (!$run.WaitForExit(120000)) { $run.Kill(); throw 'Installer test timed out' }
+          if ($run.ExitCode -ne 0) { throw ('Installer self-test failed with exit code ' + $run.ExitCode) }
+          'PASS: native EXE launch, payload integrity, temporary installation, reinstall, injected rollback, unrelated-file protection, cleanup.' | Out-File -Encoding utf8 build/windows-runtime-result.txt
+          'Manual Windows 11 UI, uninstallation, SmartScreen and publisher signing remain separate checks.' | Out-File -Encoding utf8 -Append build/windows-runtime-result.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: SinaOCO-Windows-Test-Evidence
+          path: |
+            build/*.txt
+            build/*.log
+          if-no-files-found: warn
+          retention-days: 7
