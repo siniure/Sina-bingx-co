@@ -1,0 +1,92 @@
+{
+  "schema_version": 2,
+  "name": "Sina BTC Standard Auto OCO",
+  "prepared_on": "2026-11-02",
+  "timezone": "Europe/Istanbul",
+  "scope": "BTCUSDT BingX Standard Futures; analysis and alerts only",
+  "state": "PAUSED",
+  "live_connected": false,
+  "standard_index_candles_verified": false,
+  "continuous_host_connected": false,
+  "delivery_verified": false,
+  "native_chatgpt_new_chat_delivery_supported": false,
+  "account_readonly_connected": false,
+  "strategy_implemented": true,
+  "all_agreement_checks_automated": false,
+  "start_command": "شروع OCO اتوماتیک",
+  "stop_command": "کنسل کردن OCO اتوماتیک",
+  "trusted_standalone_command_required": true,
+  "exchange_order_execution": false,
+  "proposed_quote_poll_seconds": 5,
+  "proposed_signal_evaluation": "after each verified closed five-minute candle",
+  "proposed_quote_max_age_seconds": 15,
+  "proposed_timeframes": [
+    "5m",
+    "15m",
+    "1h",
+    "4h",
+    "12h",
+    "1d"
+  ],
+  "indicators": {
+    "macd": [
+      12,
+      26,
+      9
+    ],
+    "macd_histogram": "line_minus_signal; no factor of two",
+    "atr": {
+      "period": 14,
+      "method": "Wilder RMA"
+    },
+    "rsi": {
+      "periods": [
+        14,
+        24
+      ],
+      "method": "Wilder",
+      "source": "close"
+    },
+    "volume": "optional; actual source and meaning required"
+  },
+  "proposed_default_risk_fraction": 0.005,
+  "maximum_agreed_risk_fraction": 0.2,
+  "live_fee_rate": null,
+  "historical_observed_fee_fraction": 0.00045,
+  "historical_fee_is_live_verified": false,
+  "reasons_blocking_activation": [
+    "Standard Index quote and OHLC source is not independently verified or connected.",
+    "Render UI account connection is documented but executable Render tools and selected workspace are unavailable in this chat.",
+    "No continuous service or verified notification destination has been deployed.",
+    "Research rules have not passed out-of-sample or real-feed paper evaluation.",
+    "Fresh complete Standard account risk coverage and current product fees are unavailable.",
+    "Live publication is deliberately unavailable pending review and independent user activation."
+  ],
+  "revision": "research_pipeline_v3",
+  "cloud_provider_candidate": "Render",
+  "cloud_provider_connected": true,
+  "telegram_destination_selected": false,
+  "software_version": "0.3.0",
+  "strategy_status": "RESEARCH_ONLY",
+  "strategy_version": "standard-retest-research-0.1",
+  "strategy_profitability_validated": false,
+  "out_of_sample_validation_completed": false,
+  "live_activation_implemented": false,
+  "cloud_provider_connection_basis": "User handoff reports successful UI connection; not an executable workspace probe",
+  "render_executable_tools_exposed": false,
+  "render_workspace_read": false,
+  "render_cli_configured": false,
+  "readonly_standard_client_implemented": true,
+  "readonly_standard_client_live_tested": false,
+  "persistent_paper_journal_implemented": true,
+  "local_paper_worker_implemented": true,
+  "external_notification_adapter_implemented": false,
+  "local_tests_passed": 80,
+  "local_test_counts": {
+    "test_core": 28,
+    "test_indicators": 17,
+    "test_pipeline": 35
+  },
+  "verification_scope": "Synthetic unit/integration and CLI smoke only",
+  "render_template_provider_validated": false
+}

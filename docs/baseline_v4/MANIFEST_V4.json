@@ -1,0 +1,324 @@
+{
+  "version": "0.4.0",
+  "prepared_at_istanbul": "2026-11-02T21:43:00.661259+03:00",
+  "live_publication": false,
+  "tests_passed": 107,
+  "files": {
+    ".github/workflows/android-build.yml": {
+      "bytes": 914,
+      "sha256": "5cdf734bd05a92c0ac7127a2534306617573968fb13b04f090d6f0143b368cbd"
+    },
+    "AGREEMENT_AMENDMENT_FA.md": {
+      "bytes": 10142,
+      "sha256": "d88a83f80536e84f015f96ed1f53646e94482c7879f18dbca029db8dcf08ce1a"
+    },
+    "AGREEMENT_AUTOMATION_MATRIX_FA.md": {
+      "bytes": 3572,
+      "sha256": "fa638e4788c5579628b21bd4698398d045afc01eccbd9928485cd68951e3657b"
+    },
+    "CORE_README_FA.md": {
+      "bytes": 8804,
+      "sha256": "ebffb011c005baf0eec4bb48adfbf0efee3ee3340294c7170167701126fb0d78"
+    },
+    "HANDOFF_UPDATE_FA.md": {
+      "bytes": 7439,
+      "sha256": "1d57cf019ba4f897e614513c0554e27a5189b8d5eaa5b91b00127d72fcd9a69d"
+    },
+    "INSTALL_GUIDE_FA.md": {
+      "bytes": 13816,
+      "sha256": "8f125b2d4c5ef61e1b6fe901c34fc8bf14fa45a0d57f9487f9b5c3e618d0a114"
+    },
+    "README_FA.md": {
+      "bytes": 6728,
+      "sha256": "b5aa20f7cd33f5c7b7e06d77128c09a9d54a3d0b6e6b6394cece4b278dce64d6"
+    },
+    "SNAPSHOT_CONTRACT_FA.md": {
+      "bytes": 3703,
+      "sha256": "11f907a57181811ada303adc9e9f65f4f5207f27a1731af618824343ab6ed90a"
+    },
+    "SOURCE_RESEARCH_2026-11-02.md": {
+      "bytes": 4648,
+      "sha256": "55a71800599cb22bbeef8dc3c3e2b58778d8448d1e19efff89f0a64b32cf9752"
+    },
+    "STRATEGY_RESEARCH_FA.md": {
+      "bytes": 6993,
+      "sha256": "d505ead7b617b3bf3e8cd70e21e716c04a8fad2cdb02994f354263baf8d7698c"
+    },
+    "TEST_REPORT.txt": {
+      "bytes": 10009,
+      "sha256": "a95df0c95af4058e6eb7f890289bb5c535ae6ae1d1052632fca7911a8a0e46cd"
+    },
+    "USER_NEXT_STEPS_FA.md": {
+      "bytes": 1742,
+      "sha256": "cf78e3d02c92de0b4fab2a2c877348478997070e49825b35699b293b6433042e"
+    },
+    "bingx_standard_guard.py": {
+      "bytes": 9347,
+      "sha256": "8f66e6e73db5acc847bcc9d8cddc166cb1625e9866e3d57baf37c4d515b57f0f"
+    },
+    "clients/android/BUILD_STATUS.json": {
+      "bytes": 488,
+      "sha256": "56c6e50c847604405ff2bcca9d4901d3ae40c38c750204ee09bdb2f2262a8b3d"
+    },
+    "clients/android/app/build.gradle": {
+      "bytes": 413,
+      "sha256": "c3b801fbf3e0f9b879a52f7dd93b36980448dc0622801ba59da20ca0b2e35c74"
+    },
+    "clients/android/app/src/main/AndroidManifest.xml": {
+      "bytes": 699,
+      "sha256": "0b8fff60e33bc715bbaf646c5c23758036a20655306f7f331de9894f3eb1b502"
+    },
+    "clients/android/app/src/main/java/com/sina/oco/MainActivity.java": {
+      "bytes": 4998,
+      "sha256": "b67fa75cda3d2f51fb36e50d189df963e5de37d89a059f0a1581ea95951e3fc7"
+    },
+    "clients/android/build.gradle": {
+      "bytes": 69,
+      "sha256": "048ecfefe09971849fc8c9326de9d0e8af7e50e371aed980e2e1617124bb969f"
+    },
+    "clients/android/gradle.properties": {
+      "bytes": 77,
+      "sha256": "65c8508e4db1e61f18f29d3ded79431d70397238316774859a627f2d29e02bb4"
+    },
+    "clients/android/settings.gradle": {
+      "bytes": 268,
+      "sha256": "1afd03f488691249c208a46c893988458f164073d86c8c057a8c90e1d145f328"
+    },
+    "clients/ios/BUILD_STATUS.json": {
+      "bytes": 424,
+      "sha256": "f2c104786e350acc29641b0cc3799488fa876ad5430c0d3d93bdc95e8ca224cc"
+    },
+    "clients/ios/SinaOCO/Info.plist": {
+      "bytes": 862,
+      "sha256": "9b0d66fc2d89e7e35d66b38e2033ce5b8205a419e8156f3418b250ab8bc8ae7d"
+    },
+    "clients/ios/SinaOCO/SinaOCOApp.swift": {
+      "bytes": 3142,
+      "sha256": "7ea10941c11734aff2b05a5de516cef07760d7662b42d4c18caa9cdb8c855191"
+    },
+    "clients/ios/SinaOCO.xcodeproj/project.pbxproj": {
+      "bytes": 3658,
+      "sha256": "3dcda1780e6ad3775499d6f48d96ade97e564d1b7bb0704faa4ea5e69b51f631"
+    },
+    "clients/windows/Install.ps1": {
+      "bytes": 3345,
+      "sha256": "17d9fe45d325800057bec4addb9cb780380958b6546ba5b8e9d8632af4570fb8"
+    },
+    "clients/windows/Uninstall.ps1": {
+      "bytes": 1694,
+      "sha256": "5adfbc10ad25ae973238e0fffc70e431179570ec441b755e268c77b1dfeaacab"
+    },
+    "clients/windows/bootstrap.c": {
+      "bytes": 3704,
+      "sha256": "4ef4da913adbe54bf8ce067c603ae8064d8c070e9a49b4fa1bb5b14e0f06b891"
+    },
+    "config/deployment_status.json": {
+      "bytes": 4866,
+      "sha256": "f19a6ac34d268c84d5002a36257fb94f1e2da5ea6de9e00e3d370f1860195cb5"
+    },
+    "config/strategy.research.json": {
+      "bytes": 406,
+      "sha256": "16db6c0aba8f8e7c85023943ad1521159a681e31dc9b5ed855ca0f4e89457e71"
+    },
+    "core.py": {
+      "bytes": 18212,
+      "sha256": "64872d96f405989a76f64e4838f6222b3c49690e4593e41a0e8f0e7c1de02ddd"
+    },
+    "docs/baseline_v2/README_FA.md": {
+      "bytes": 9926,
+      "sha256": "45c9b0cc9f6dc4a43a0e05715a8620a5a5b9b70dbd8147fa3cc8d54e3e1bc4cf"
+    },
+    "docs/baseline_v2/TEST_REPORT.txt": {
+      "bytes": 5840,
+      "sha256": "c4bd3755b540dd2d5c9cd7f69719d57be613a33dd909f01f238ed9552f6e89eb"
+    },
+    "docs/baseline_v2/USER_NEXT_STEPS_FA.md": {
+      "bytes": 7224,
+      "sha256": "166582510360fb5cf399078c32864cecf5b20c6341160bc1fabb3928670469fb"
+    },
+    "docs/baseline_v2/deployment_status.json": {
+      "bytes": 2089,
+      "sha256": "db70a7c084d69de3fa3b232cc86156a253e3a3e40a648ab5cafa469601d9d050"
+    },
+    "docs/baseline_v3/HANDOFF_UPDATE_FA.md": {
+      "bytes": 6632,
+      "sha256": "88171f92f2ff9792dcbdb3d6c3f31ee35fcd604e97f19f23a4a97e43bf488797"
+    },
+    "docs/baseline_v3/MANIFEST_V3.json": {
+      "bytes": 5874,
+      "sha256": "b282fdf4593d4398566ca74f9ad80f6cb0113882b905146c20b939eb7fbf7811"
+    },
+    "docs/baseline_v3/README_FA.md": {
+      "bytes": 5894,
+      "sha256": "43a8ccab9be1e6e27dec154969c59cf4132626ff0cc250d8aa9611341d10c8fe"
+    },
+    "docs/baseline_v3/TEST_REPORT.txt": {
+      "bytes": 7273,
+      "sha256": "d1cf083212085f911443b5801e2583004b3e656d069de0bfe0d1e4960773a6b6"
+    },
+    "docs/baseline_v3/deployment_status.json": {
+      "bytes": 3314,
+      "sha256": "471c1deaa33ce6ca0bd692c8ae60d30bc218cab65c744d17e9cd7081cc86117b"
+    },
+    "indicators.py": {
+      "bytes": 9095,
+      "sha256": "a09384f6787616d6f1a29cff62bcf061628e4a234b44f2df7b7dee88b26790e8"
+    },
+    "installers/SinaOCO_Setup_x64.build-status.json": {
+      "bytes": 408,
+      "sha256": "2e8dd01ffdcfbb5a965e1451183244c6403ca9742cfa0e0131b8b498a8afbb1b"
+    },
+    "installers/SinaOCO_Setup_x64.exe": {
+      "bytes": 26671,
+      "sha256": "fb323193693dd9de1647733a31eee0aca357afc8ab246feacf4857b0f266dcb2"
+    },
+    "installers/SinaOCO_Setup_x64.inspection.txt": {
+      "bytes": 5109,
+      "sha256": "72f24a3cde4d9a935b3aba8f46029dd0bb0bd01fda3fefb2bd72c11fc65b3cc0"
+    },
+    "oco/__init__.py": {
+      "bytes": 111,
+      "sha256": "be89e609696eab5b77251743ed5ade075ed07accb6ecdf86d01a087d5673f277"
+    },
+    "oco/__main__.py": {
+      "bytes": 3125,
+      "sha256": "a982e6fecb72a3dfb72d34060c1d4952b14c5917f7f4787527430096a579f06c"
+    },
+    "oco/demo.py": {
+      "bytes": 3195,
+      "sha256": "1b211b4e5b94bd39409820b8f7223106acf86d7bf5acc2d5d21bfa74b195cb8d"
+    },
+    "oco/engine.py": {
+      "bytes": 2230,
+      "sha256": "69665d6ec79ab709c52c1c8a574a60a97fa48161bed43d17c4be0a179dfcb142"
+    },
+    "oco/formatting.py": {
+      "bytes": 4417,
+      "sha256": "02ce9b0eed14cf0cfa3b115a9003971be3dd4ecea7bac8f801ab686b00af8d8e"
+    },
+    "oco/hub.py": {
+      "bytes": 12201,
+      "sha256": "0ced726a60235790c6c454e887ee9e581ca10805f1fe9f32e618f55130d1b76d"
+    },
+    "oco/journal.py": {
+      "bytes": 8883,
+      "sha256": "98799cdbaed9fe581274b2f51713a543d1cca3b869235bb30c4dc8affbca2048"
+    },
+    "oco/market.py": {
+      "bytes": 6210,
+      "sha256": "55a0f297325446f28c4d4d9b2ca061382f5a350f2cb79726c398bc0f4304f071"
+    },
+    "oco/risk.py": {
+      "bytes": 7745,
+      "sha256": "74471d96eb4306ffb51f80ed06281478a4f03a6cf0843553bd5d434dd46f448d"
+    },
+    "oco/service.py": {
+      "bytes": 3826,
+      "sha256": "f004febd534c17c766f498846522e72cce5322ae2b4abe6211ce467b297f9e06"
+    },
+    "oco/standard_account.py": {
+      "bytes": 4855,
+      "sha256": "27f9201e124dab4a2af0f5957a4c9e4de2728bda83b175a7bb4b2aea03d439c1"
+    },
+    "oco/strategy.py": {
+      "bytes": 8823,
+      "sha256": "c6f0a592b132b96b6003a3b8f54acf31a684acbdf6ec5f94e7bf4c4254857170"
+    },
+    "oco/telegram_bot.py": {
+      "bytes": 9766,
+      "sha256": "681c2a91428485cf2812a0315d7b85aff4eb7fbf1451314f61cfae9f3f909017"
+    },
+    "prompts/01_collector_FA.md": {
+      "bytes": 2922,
+      "sha256": "db246bdc7480db9e6a2c4cbd94f37c217f5b65f7a1e490f36e657ee15fdbab4d"
+    },
+    "prompts/02_analyst_FA.md": {
+      "bytes": 3850,
+      "sha256": "e21c96a37f091c722373831504ed86eca17bf0b73a3a306f040c2b99fd030f91"
+    },
+    "prompts/03_reviewer_delivery_FA.md": {
+      "bytes": 3523,
+      "sha256": "b60ea5c1270d4376e954a945f97b26352002989bde1219d1f05bd34a7363101d"
+    },
+    "readiness.sample.json": {
+      "bytes": 415,
+      "sha256": "3bd34fae48e590fcbdae014e9c174e0ec602535b324a6499a2e56348776cba12"
+    },
+    "render.web.yaml.example": {
+      "bytes": 734,
+      "sha256": "60f26a93b5aeeea2780d970f8a05c4931151fefbedc4d9239b497ac8fa39f8c6"
+    },
+    "render.yaml.example": {
+      "bytes": 674,
+      "sha256": "bdcb288b48deb3c9ef20980728663d2e7ae052af685dd90b11b4136d70117ee1"
+    },
+    "scripts/build_windows_installer.py": {
+      "bytes": 7806,
+      "sha256": "f13186b6c60e67739c89e409b62b6f27c6be8187a512511c77227f987d08dad9"
+    },
+    "scripts/run_demo.py": {
+      "bytes": 1623,
+      "sha256": "0bc7a77b2f8a501f162d41cd2de4264bac33889a253b1ac3ca109d79cff5c1b1"
+    },
+    "scripts/run_local_hub.py": {
+      "bytes": 1952,
+      "sha256": "50b4ce0b445aca8b08437965d92d0a35e70ef1ec7444eed64df17942f6b6a040"
+    },
+    "scripts/start_hosted.py": {
+      "bytes": 664,
+      "sha256": "07d9cd39389d387cb7444fe99726eab37a46921bc04c715b3b5bd36058fbe245"
+    },
+    "state.json": {
+      "bytes": 69,
+      "sha256": "0e9057d0795e3a564e56afbc18e9257a938491bd672fca381673d0ddfab98324"
+    },
+    "tests/test_core.py": {
+      "bytes": 17825,
+      "sha256": "9a3545f151eb7af548e65ac0fbc3d3e9e6e73b2aca45342fd6edc07145f86dc5"
+    },
+    "tests/test_hub_telegram.py": {
+      "bytes": 14293,
+      "sha256": "fe250ff69e28b5c684358aa3716dd32078c934333139310c95a24bef5cd9888c"
+    },
+    "tests/test_indicators.py": {
+      "bytes": 6108,
+      "sha256": "4a8ceb8ee3f8f18b6d261f3e79d2afdb3b091b3bb07dc5328bcdddd6745a858a"
+    },
+    "tests/test_pipeline.py": {
+      "bytes": 18216,
+      "sha256": "b7b790861973edd1dbc1a6b3ac8537342962d6e62b0e883c0e548756a784ad55"
+    },
+    "web/app.css": {
+      "bytes": 5023,
+      "sha256": "05507df48abfcb7a3654839ac366e14f1380aa438d0c9fb94c010ac5135d5f07"
+    },
+    "web/app.js": {
+      "bytes": 10126,
+      "sha256": "e3a700a27ecb6f036d77397e96386c46c6756b06e0a900fc177622df4b426561"
+    },
+    "web/icon-192.png": {
+      "bytes": 980,
+      "sha256": "5ba9e05e9aade958a4d05a7785ec475eebfbdad7ddde8e377746a4ee249d5c69"
+    },
+    "web/icon-512.png": {
+      "bytes": 2869,
+      "sha256": "15c771f84dd8b50a60d99b59313370a9aeaf5ca5797e2b80299474e32c765e27"
+    },
+    "web/icon.svg": {
+      "bytes": 369,
+      "sha256": "09cd5c39ce6487b4a035e5603c427af054323d6af8f6b9cab60d65749b80ee3e"
+    },
+    "web/index.html": {
+      "bytes": 5539,
+      "sha256": "66722f862148744f6604dac45a8f9aa535c49340d01bb36d481696df32b1c4be"
+    },
+    "web/manifest.webmanifest": {
+      "bytes": 448,
+      "sha256": "9f6099a24658a9e2a7e91ac9ae9798c5d5edcd5aaf8a3cf6a139f45915d2abb9"
+    },
+    "web/sw.js": {
+      "bytes": 928,
+      "sha256": "ea389a5a0a3e1f30b555c50274fa0140eb2f39dc7777aebf5fc5e50c16242b03"
+    }
+  }
+}

@@ -1,0 +1,166 @@
+
+/tmp/sina-windows-build-fjmwca0w/SinaOCO_Setup_x64.exe:     file format pei-x86-64
+
+Characteristics 0x226
+	executable
+	line numbers stripped
+	large address aware
+	debugging information removed
+
+Time/Date		Mon Nov  2 13:33:35 2026
+Magic			020b	(PE32+)
+MajorLinkerVersion	2
+MinorLinkerVersion	42
+SizeOfCode		0000000000000800
+SizeOfInitializedData	0000000000006600
+SizeOfUninitializedData	0000000000014200
+AddressOfEntryPoint	0000000000001133
+BaseOfCode		0000000000001000
+ImageBase		0000000140000000
+SectionAlignment	00001000
+FileAlignment		00000200
+MajorOSystemVersion	6
+MinorOSystemVersion	0
+MajorImageVersion	0
+MinorImageVersion	0
+MajorSubsystemVersion	6
+MinorSubsystemVersion	2
+Win32Version		00000000
+SizeOfImage		00021000
+SizeOfHeaders		00000400
+CheckSum		00000000
+Subsystem		00000002	(Windows GUI)
+DllCharacteristics	00000160
+					HIGH_ENTROPY_VA
+					DYNAMIC_BASE
+					NX_COMPAT
+SizeOfStackReserve	0000000000200000
+SizeOfStackCommit	0000000000001000
+SizeOfHeapReserve	0000000000100000
+SizeOfHeapCommit	0000000000001000
+LoaderFlags		00000000
+NumberOfRvaAndSizes	00000010
+
+The Data Directory
+Entry 0 0000000000000000 00000000 Export Directory [.edata (or where ever we found it)]
+Entry 1 000000000001f018 0000003c Import Directory [parts of .idata]
+Entry 2 0000000000000000 00000000 Resource Directory [.rsrc]
+Entry 3 0000000000000000 00000000 Exception Directory [.pdata]
+Entry 4 0000000000000000 00000000 Security Directory
+Entry 5 0000000000020000 00000094 Base Relocation Directory [.reloc]
+Entry 6 0000000000000000 00000000 Debug Directory
+Entry 7 0000000000000000 00000000 Description Directory
+Entry 8 0000000000000000 00000000 Special Directory
+Entry 9 0000000000000000 00000000 Thread Storage Directory [.tls]
+Entry a 0000000000000000 00000000 Load Configuration Directory
+Entry b 0000000000000000 00000000 Bound Import Directory
+Entry c 000000000001f818 00000088 Import Address Table Directory
+Entry d 0000000000000000 00000000 Delay Import Directory
+Entry e 0000000000000000 00000000 CLR Runtime Header
+Entry f 0000000000000000 00000000 Reserved
+
+There is an import table in .idata at 0x14001f018
+
+The Import Tables (interpreted .idata section contents)
+ vma:            Hint    Time      Forward  DLL       First
+                 Table   Stamp     Chain    Name      Thunk
+ 0001f018	0001f054 00000000 00000000 0001f0cc 0001f818
+
+	DLL Name: KERNEL32.dll
+	vma:  Hint/Ord Member-Name Bound-To
+	1f0da	    0  GetTempPathW
+	1f0ea	    0  GetTempFileNameW
+	1f0fe	    0  DeleteFileW
+	1f10c	    0  CreateDirectoryW
+	1f120	    0  CreateFileW
+	1f12e	    0  WriteFile
+	1f13a	    0  CloseHandle
+	1f148	    0  GetSystemDirectoryW
+	1f15e	    0  GetCommandLineW
+	1f170	    0  CreateProcessW
+	1f182	    0  WaitForSingleObject
+	1f198	    0  GetExitCodeProcess
+	1f1ae	    0  RemoveDirectoryW
+	1f1c2	    0  ExitProcess
+
+ 0001f02c	0001f1d0 00000000 00000000 0001f1e0 0001f890
+
+	DLL Name: USER32.dll
+	vma:  Hint/Ord Member-Name Bound-To
+	1f1ec	    0  MessageBoxW
+
+ 0001f040	00000000 00000000 00000000 00000000 00000000
+
+
+PE File Base Relocations (interpreted .reloc section contents)
+
+Virtual Address: 00001000 Chunk size 136 (0x88) Number of fixups 64
+	reloc    0 offset   2a [102a] DIR64
+	reloc    1 offset   55 [1055] DIR64
+	reloc    2 offset   8e [108e] DIR64
+	reloc    3 offset   b0 [10b0] DIR64
+	reloc    4 offset   dc [10dc] DIR64
+	reloc    5 offset   f7 [10f7] DIR64
+	reloc    6 offset  101 [1101] DIR64
+	reloc    7 offset  10b [110b] DIR64
+	reloc    8 offset  124 [1124] DIR64
+	reloc    9 offset  14c [114c] DIR64
+	reloc   10 offset  1b7 [11b7] DIR64
+	reloc   11 offset  1c1 [11c1] DIR64
+	reloc   12 offset  1cb [11cb] DIR64
+	reloc   13 offset  1d9 [11d9] DIR64
+	reloc   14 offset  1ee [11ee] DIR64
+	reloc   15 offset  24a [124a] DIR64
+	reloc   16 offset  28e [128e] DIR64
+	reloc   17 offset  29e [129e] DIR64
+	reloc   18 offset  2ad [12ad] DIR64
+	reloc   19 offset  2c5 [12c5] DIR64
+	reloc   20 offset  2d3 [12d3] DIR64
+	reloc   21 offset  2e3 [12e3] DIR64
+	reloc   22 offset  2ed [12ed] DIR64
+	reloc   23 offset  2fd [12fd] DIR64
+	reloc   24 offset  307 [1307] DIR64
+	reloc   25 offset  31b [131b] DIR64
+	reloc   26 offset  329 [1329] DIR64
+	reloc   27 offset  33e [133e] DIR64
+	reloc   28 offset  34b [134b] DIR64
+	reloc   29 offset  355 [1355] DIR64
+	reloc   30 offset  35f [135f] DIR64
+	reloc   31 offset  372 [1372] DIR64
+	reloc   32 offset  381 [1381] DIR64
+	reloc   33 offset  38e [138e] DIR64
+	reloc   34 offset  398 [1398] DIR64
+	reloc   35 offset  3ac [13ac] DIR64
+	reloc   36 offset  3bd [13bd] DIR64
+	reloc   37 offset  3cb [13cb] DIR64
+	reloc   38 offset  3da [13da] DIR64
+	reloc   39 offset  3eb [13eb] DIR64
+	reloc   40 offset  3fa [13fa] DIR64
+	reloc   41 offset  412 [1412] DIR64
+	reloc   42 offset  41e [141e] DIR64
+	reloc   43 offset  42b [142b] DIR64
+	reloc   44 offset  435 [1435] DIR64
+	reloc   45 offset  455 [1455] DIR64
+	reloc   46 offset  46c [146c] DIR64
+	reloc   47 offset  47b [147b] DIR64
+	reloc   48 offset  48f [148f] DIR64
+	reloc   49 offset  49e [149e] DIR64
+	reloc   50 offset  4b4 [14b4] DIR64
+	reloc   51 offset  4c3 [14c3] DIR64
+	reloc   52 offset  4df [14df] DIR64
+	reloc   53 offset  4f1 [14f1] DIR64
+	reloc   54 offset  50d [150d] DIR64
+	reloc   55 offset  539 [1539] DIR64
+	reloc   56 offset  545 [1545] DIR64
+	reloc   57 offset  555 [1555] DIR64
+	reloc   58 offset  571 [1571] DIR64
+	reloc   59 offset  57d [157d] DIR64
+	reloc   60 offset  59b [159b] DIR64
+	reloc   61 offset  5ab [15ab] DIR64
+	reloc   62 offset  5bb [15bb] DIR64
+	reloc   63 offset    0 [1000] ABSOLUTE
+
+Virtual Address: 00002000 Chunk size 12 (0xc) Number of fixups 2
+	reloc    0 offset    0 [2000] DIR64
+	reloc    1 offset    0 [2000] ABSOLUTE
+

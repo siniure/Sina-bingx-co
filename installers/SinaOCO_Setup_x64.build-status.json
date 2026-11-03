@@ -1,0 +1,10 @@
+{
+  "artifact": "installers/SinaOCO_Setup_x64.exe",
+  "format": "PE32+ Windows GUI x64",
+  "sha256": "8fda69ccca546b41b0ef292522d6b468f6ba88eddd1fe246418820a767371c19",
+  "pe_structure_and_imports_verified": true,
+  "windows_execution_tested": false,
+  "publisher_signed": false,
+  "powershell_policy": "Child process RemoteSigned after installer confirmation; no permanent or group-policy changes",
+  "installs": "Per-user dashboard viewer only; no Python engine, market feed or cloud activation"
+}

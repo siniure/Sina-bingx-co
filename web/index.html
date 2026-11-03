@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#111c21">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Sina OCO">
+  <meta name="description" content="پایش وضعیت و پیشنهادهای OCO سینا؛ حالت پژوهشی و کنترل توقف.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="app.css">
+  <script src="app.js" defer></script>
+  <title>Sina OCO</title>
+</head>
+<body>
+<main class="shell">
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark" aria-hidden="true">S</span><span dir="ltr">SINA <b>OCO</b><small>STANDARD FUTURES · BTCUSDT</small></span></a>
+    <span class="connection" id="connection">بدون اتصال</span>
+  </header>
+  <section class="intro">
+    <p class="eyebrow">کنترل مجدد و بازبینی؛ توافق ما؛ قابل کپی</p>
+    <div class="intro-row"><h1>مرکز پایش سینا</h1><span class="version">v0.4 · پژوهشی</span></div>
+    <p class="muted">پیشنهادهای یک سرور مشترک، با زمان منبع و وضعیت مشخص.</p>
+  </section>
+  <section class="notice" aria-label="وضعیت انتشار"><span class="notice-dot" aria-hidden="true"></span><div><strong>انتشار زنده غیرفعال است</strong><p>دریافت معتبر Standard و فعال‌سازی نهایی هنوز تأیید نشده‌اند.</p></div></section>
+  <section class="metrics" aria-label="وضعیت سامانه">
+    <article><span>وضعیت سامانه</span><strong id="mode">متوقف</strong><small id="mode-detail">در انتظار اتصال سرور</small></article>
+    <article><span>Index Price معتبر</span><strong id="price">—</strong><small id="price-time">دادهٔ زنده در دسترس نیست</small></article>
+    <article><span>مسیر تلگرام</span><strong id="telegram-state">متصل نیست</strong><small id="telegram-detail">اتصال مقصد باید تأیید شود</small></article>
+  </section>
+  <section class="panel" aria-labelledby="connect-title">
+    <div class="section-heading"><h2 id="connect-title">اتصال به سرور</h2><button id="disconnect" class="quiet" type="button" hidden>قطع اتصال</button></div>
+    <form id="connection-form">
+      <label id="server-label" hidden>نشانی سرور HTTPS<input id="server-url" type="url" inputmode="url" placeholder="https://…" dir="ltr" autocomplete="url"></label>
+      <label id="token-label">کلید دسترسی این نشست<input id="access-token" type="password" dir="ltr" autocomplete="off" spellcheck="false" placeholder="کلید را فقط در این برنامه وارد کن"></label>
+      <button id="connect" type="submit">اتصال و دریافت وضعیت</button>
+    </form>
+    <p id="connect-note" class="muted">کلید در حافظهٔ همین نشست می‌ماند؛ در آدرس، فایل گزارش یا فضای مرورگر ذخیره نمی‌شود.</p>
+    <p id="feedback" role="status" aria-live="polite"></p>
+  </section>
+  <section class="panel" aria-labelledby="decision-title">
+    <div class="section-heading"><h2 id="decision-title">آخرین ارزیابی</h2><label class="file-button">بازکردن گزارش JSON<input id="import-file" type="file" accept="application/json,.json"></label></div>
+    <div class="decision-row"><strong id="decision">فعلاً ورود ندارد</strong><span id="data-label" class="muted">داده‌ای دریافت نشده</span></div>
+    <p id="reason" class="muted">نمایش ساعت دستگاه به‌معنی دریافت قیمت زنده نیست.</p>
+    <div id="levels" class="levels" hidden></div>
+    <div class="table-wrap" id="tf-wrap" hidden><table><thead><tr><th>تایم‌فریم</th><th>جهت</th><th>RSI14 / RSI24</th><th>ATR14</th></tr></thead><tbody id="timeframes"></tbody></table></div>
+  </section>
+  <section class="panel" aria-labelledby="archive-title"><div class="section-heading"><h2 id="archive-title">آرشیو پیشنهادها</h2><span class="muted" id="record-count">بدون رکورد</span></div><div id="records" class="empty">پس از اتصال، رکوردهای مستقل اینجا نمایش داده می‌شوند.</div></section>
+  <section class="panel" aria-labelledby="controls-title">
+    <div class="section-heading"><h2 id="controls-title">کنترل و تلگرام</h2><span class="muted">نیازمند کلید کنترل</span></div>
+    <div class="actions"><button id="stop" class="danger" type="button" disabled>توقف سامانه</button><button id="pair" type="button" disabled>اتصال تلگرام خودم</button><button id="test-telegram" class="quiet" type="button" disabled>آزمون پیام غیرمعاملاتی</button></div>
+    <p id="pair-result" role="status"></p><p class="muted">توقف، صف همین سامانه را متوقف می‌کند. پوزیشن‌ها و سفارش‌های صرافی تغییر نمی‌کنند.</p>
+  </section>
+  <footer><span dir="ltr">SINA OCO · BTCUSDT STANDARD INDEX</span><span>زمان گزارش‌ها: استانبول · UTC+3</span></footer>
+</main>
+</body>
+</html>

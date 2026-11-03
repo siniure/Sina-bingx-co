@@ -1,0 +1,139 @@
+{
+  "schema_version": 2,
+  "name": "Sina BTC Standard Auto OCO",
+  "prepared_on": "2026-11-02",
+  "timezone": "Europe/Istanbul",
+  "scope": "BTCUSDT BingX Standard Futures; analysis and alerts only",
+  "state": "PAUSED",
+  "live_connected": false,
+  "standard_index_candles_verified": false,
+  "continuous_host_connected": false,
+  "delivery_verified": false,
+  "native_chatgpt_new_chat_delivery_supported": false,
+  "account_readonly_connected": false,
+  "strategy_implemented": true,
+  "all_agreement_checks_automated": false,
+  "start_command": "شروع OCO اتوماتیک",
+  "stop_command": "کنسل کردن OCO اتوماتیک",
+  "trusted_standalone_command_required": true,
+  "exchange_order_execution": false,
+  "proposed_quote_poll_seconds": 5,
+  "proposed_signal_evaluation": "after each verified closed five-minute candle",
+  "proposed_quote_max_age_seconds": 15,
+  "proposed_timeframes": [
+    "5m",
+    "15m",
+    "1h",
+    "4h",
+    "12h",
+    "1d"
+  ],
+  "indicators": {
+    "macd": [
+      12,
+      26,
+      9
+    ],
+    "macd_histogram": "line_minus_signal; no factor of two",
+    "atr": {
+      "period": 14,
+      "method": "Wilder RMA"
+    },
+    "rsi": {
+      "periods": [
+        14,
+        24
+      ],
+      "method": "Wilder",
+      "source": "close"
+    },
+    "volume": "optional; actual source and meaning required"
+  },
+  "proposed_default_risk_fraction": 0.005,
+  "maximum_agreed_risk_fraction": 0.2,
+  "live_fee_rate": null,
+  "historical_observed_fee_fraction": 0.00045,
+  "historical_fee_is_live_verified": false,
+  "reasons_blocking_activation": [
+    "Standard Index live quote and OHLC are not independently verified or connected.",
+    "Render executable access, selected workspace and source repository are unavailable.",
+    "No real cloud deployment or paid resource has been created; cost is unapproved.",
+    "Telegram token and verified recipient are not configured; no real test message was sent.",
+    "Android SDK/JDK compiler and macOS/Xcode/signing are unavailable for native mobile binaries.",
+    "Real market/account/fee verification, out-of-sample and live-feed paper validation are incomplete.",
+    "Live signal publication remains deliberately blocked pending readiness review and independent user activation."
+  ],
+  "revision": "multiplatform_preparation_v4",
+  "cloud_provider_candidate": "Render",
+  "cloud_provider_connected": true,
+  "telegram_destination_selected": false,
+  "software_version": "0.4.0",
+  "strategy_status": "RESEARCH_ONLY",
+  "strategy_version": "standard-retest-research-0.1",
+  "strategy_profitability_validated": false,
+  "out_of_sample_validation_completed": false,
+  "live_activation_implemented": false,
+  "cloud_provider_connection_basis": "User handoff reports successful UI connection; not an executable workspace probe",
+  "render_executable_tools_exposed": false,
+  "render_workspace_read": false,
+  "render_cli_configured": false,
+  "readonly_standard_client_implemented": true,
+  "readonly_standard_client_live_tested": false,
+  "persistent_paper_journal_implemented": true,
+  "local_paper_worker_implemented": true,
+  "external_notification_adapter_implemented": true,
+  "local_tests_passed": 107,
+  "local_test_counts": {
+    "test_core": 28,
+    "test_indicators": 17,
+    "test_pipeline": 35,
+    "test_hub_telegram": 27
+  },
+  "verification_scope": "Synthetic tests, local HTTP API, mocked Telegram, JavaScript model and Windows PE structure; no real device, live market or external delivery",
+  "render_template_provider_validated": false,
+  "user_requested_telegram": true,
+  "telegram_bot_created": false,
+  "telegram_bot_connected": false,
+  "telegram_adapter_implemented": true,
+  "telegram_owner_pairing_implemented": true,
+  "telegram_real_delivery_tested": false,
+  "hub_api_implemented": true,
+  "web_client_implemented": true,
+  "cloud_service_deployed": false,
+  "cloud_registration_performed": false,
+  "github_plugin_installed": true,
+  "github_executable_tools_exposed": false,
+  "browser_ui_qa_performed": false,
+  "native_chatgpt_continuous_display_supported": false,
+  "platforms": {
+    "windows": {
+      "installer_built": true,
+      "pe_imports_verified": true,
+      "windows_runtime_tested": false,
+      "publisher_signed": false,
+      "scope": "per-user dashboard viewer"
+    },
+    "android": {
+      "source_prepared": true,
+      "ci_build_recipe_prepared": true,
+      "ci_executed": false,
+      "apk_built": false,
+      "device_tested": false
+    },
+    "ios": {
+      "source_prepared": true,
+      "ipa_built": false,
+      "owner_signing_configured": false,
+      "device_tested": false
+    },
+    "pwa": {
+      "source_prepared": true,
+      "https_deployed": false,
+      "browser_ui_tested": false
+    },
+    "chatgpt": {
+      "archived_report_viewer_prepared": true,
+      "continuous_live_feed": false
+    }
+  }
+}

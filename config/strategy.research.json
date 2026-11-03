@@ -1,0 +1,14 @@
+{
+  "version": "standard-retest-research-0.1",
+  "research_tick_size": "0.1",
+  "minimum_net_rr": "2",
+  "risk_fraction": "0.005",
+  "aggregate_risk_fraction": "0.005",
+  "maximum_agreed_risk_fraction": "0.2",
+  "qty_step": "0.001",
+  "minimum_qty": "0.001",
+  "leverage": "10",
+  "contract_specs_live_verified": false,
+  "strategy_profitability_validated": false,
+  "live_activation_implemented": false
+}

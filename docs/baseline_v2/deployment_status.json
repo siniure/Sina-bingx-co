@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "name": "Sina BTC Standard Auto OCO",
+  "prepared_on": "2026-11-02",
+  "timezone": "Europe/Istanbul",
+  "scope": "BTCUSDT BingX Standard Futures; analysis and alerts only",
+  "state": "PAUSED",
+  "live_connected": false,
+  "standard_index_candles_verified": false,
+  "continuous_host_connected": false,
+  "delivery_verified": false,
+  "native_chatgpt_new_chat_delivery_supported": false,
+  "account_readonly_connected": false,
+  "strategy_implemented": false,
+  "all_agreement_checks_automated": false,
+  "start_command": "شروع OCO اتوماتیک",
+  "stop_command": "کنسل کردن OCO اتوماتیک",
+  "trusted_standalone_command_required": true,
+  "exchange_order_execution": false,
+  "proposed_quote_poll_seconds": 5,
+  "proposed_signal_evaluation": "after each verified closed five-minute candle",
+  "proposed_quote_max_age_seconds": 15,
+  "proposed_timeframes": [
+    "5m",
+    "15m",
+    "1h",
+    "4h",
+    "12h",
+    "1d"
+  ],
+  "indicators": {
+    "macd": [
+      12,
+      26,
+      9
+    ],
+    "macd_histogram": "line_minus_signal; no factor of two",
+    "atr": {
+      "period": 14,
+      "method": "Wilder RMA"
+    },
+    "rsi": {
+      "periods": [
+        14,
+        24
+      ],
+      "method": "Wilder",
+      "source": "close"
+    },
+    "volume": "optional; actual source and meaning required"
+  },
+  "proposed_default_risk_fraction": 0.005,
+  "maximum_agreed_risk_fraction": 0.2,
+  "live_fee_rate": null,
+  "historical_observed_fee_fraction": 0.00045,
+  "historical_fee_is_live_verified": false,
+  "reasons_blocking_activation": [
+    "No usable BingX/TinyFish/Firecrawl data-fetch command is exposed in this chat.",
+    "Standard Index OHLC and source timestamps have not been verified.",
+    "No persistent external worker or delivery destination has been connected.",
+    "The strategy and all sixteen agreement gates are not yet implemented and validated."
+  ],
+  "revision": "audited_preparation_v2",
+  "cloud_provider_candidate": "Railway",
+  "cloud_provider_connected": false,
+  "telegram_destination_selected": false
+}

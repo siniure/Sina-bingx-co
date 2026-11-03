@@ -1,0 +1,54 @@
+Sina Auto OCO preparation: independent audit revision
+2026-11-02T17:35:06+03:00
+Local synthetic tests only. No live source, delivery, cloud deployment or profitability verified.
+
+test_abandoned_lock_fails_closed_and_is_not_deleted (test_core.GateTests.test_abandoned_lock_fails_closed_and_is_not_deleted) ... ok
+test_cannot_claim_chat_delivery (test_core.GateTests.test_cannot_claim_chat_delivery) ... ok
+test_closed_bar_and_latest_boundary_required (test_core.GateTests.test_closed_bar_and_latest_boundary_required) ... ok
+test_default_paused_and_no_file (test_core.GateTests.test_default_paused_and_no_file) ... ok
+test_equivalent_decimal_prices_have_one_duplicate_identity (test_core.GateTests.test_equivalent_decimal_prices_have_one_duplicate_identity) ... ok
+test_expired_and_future_decision_rejected (test_core.GateTests.test_expired_and_future_decision_rejected) ... ok
+test_fee_verification_matches_product_and_is_current (test_core.GateTests.test_fee_verification_matches_product_and_is_current) ... ok
+test_historical_invalidation_evidence_and_coverage_required (test_core.GateTests.test_historical_invalidation_evidence_and_coverage_required) ... ok
+test_immutable_file_and_duplicate_survive_restart (test_core.GateTests.test_immutable_file_and_duplicate_survive_restart) ... ok
+test_live_subprocess_lock_is_respected (test_core.GateTests.test_live_subprocess_lock_is_respected) ... ok
+test_long_range_upper_bound_must_preserve_net_rr (test_core.GateTests.test_long_range_upper_bound_must_preserve_net_rr) ... ok
+test_normalized_standalone_command (test_core.GateTests.test_normalized_standalone_command) ... ok
+test_observation_only_not_live_confirmation (test_core.GateTests.test_observation_only_not_live_confirmation) ... ok
+test_old_controller_cannot_override_another_controller_stop (test_core.GateTests.test_old_controller_cannot_override_another_controller_stop) ... ok
+test_price_direction_and_net_rr_rejected (test_core.GateTests.test_price_direction_and_net_rr_rejected) ... ok
+test_quote_and_reference_must_be_inside_entry_range (test_core.GateTests.test_quote_and_reference_must_be_inside_entry_range) ... ok
+test_quote_beyond_sl_or_tp_is_rejected (test_core.GateTests.test_quote_beyond_sl_or_tp_is_rejected) ... ok
+test_quotes_and_examples_do_not_start (test_core.GateTests.test_quotes_and_examples_do_not_start) ... ok
+test_readiness_expiry_is_rechecked_after_activation (test_core.GateTests.test_readiness_expiry_is_rechecked_after_activation) ... ok
+test_readiness_required_and_hourly_rejected (test_core.GateTests.test_readiness_required_and_hourly_rejected) ... ok
+test_readiness_requires_bounded_fresh_verification (test_core.GateTests.test_readiness_requires_bounded_fresh_verification) ... ok
+test_short_range_lower_bound_must_preserve_net_rr (test_core.GateTests.test_short_range_lower_bound_must_preserve_net_rr) ... ok
+test_source_and_provenance_rejected (test_core.GateTests.test_source_and_provenance_rejected) ... ok
+test_stop_clears_only_local_queue_and_blocks (test_core.GateTests.test_stop_clears_only_local_queue_and_blocks) ... ok
+test_subprocess_stop_is_observed_by_existing_instance (test_core.GateTests.test_subprocess_stop_is_observed_by_existing_instance) ... ok
+test_untrusted_command_cannot_start_or_stop (test_core.GateTests.test_untrusted_command_cannot_start_or_stop) ... ok
+test_valid_candidate_costs_and_no_full_strategy_claim (test_core.GateTests.test_valid_candidate_costs_and_no_full_strategy_claim) ... ok
+test_zero_fee_needs_explicit_verification (test_core.GateTests.test_zero_fee_needs_explicit_verification) ... ok
+test_closed_contiguous_history_and_explicit_zero_volume (test_indicators.CandleValidationTests.test_closed_contiguous_history_and_explicit_zero_volume) ... ok
+test_exchange_boundary_origin_is_preserved (test_indicators.CandleValidationTests.test_exchange_boundary_origin_is_preserved) ... ok
+test_reject_future_closed_claim (test_indicators.CandleValidationTests.test_reject_future_closed_claim) ... ok
+test_reject_gap_duplicate_and_reverse (test_indicators.CandleValidationTests.test_reject_gap_duplicate_and_reverse) ... ok
+test_reject_missing_ohlc (test_indicators.CandleValidationTests.test_reject_missing_ohlc) ... ok
+test_reject_naive_time_and_wrong_duration (test_indicators.CandleValidationTests.test_reject_naive_time_and_wrong_duration) ... ok
+test_reject_ohlc_nonfinite_and_negative_volume (test_indicators.CandleValidationTests.test_reject_ohlc_nonfinite_and_negative_volume) ... ok
+test_reject_open_candle_even_with_closed_timestamp (test_indicators.CandleValidationTests.test_reject_open_candle_even_with_closed_timestamp) ... ok
+test_atr_includes_overnight_gap_and_wilder_smoothing (test_indicators.IndicatorTests.test_atr_includes_overnight_gap_and_wilder_smoothing) ... ok
+test_ema_sma_seed_then_recursive (test_indicators.IndicatorTests.test_ema_sma_seed_then_recursive) ... ok
+test_invalid_indicator_inputs (test_indicators.IndicatorTests.test_invalid_indicator_inputs) ... ok
+test_macd_constant_history_has_zero_line_and_histogram (test_indicators.IndicatorTests.test_macd_constant_history_has_zero_line_and_histogram) ... ok
+test_macd_linear_ramp_has_analytic_seven_point_gap (test_indicators.IndicatorTests.test_macd_linear_ramp_has_analytic_seven_point_gap) ... ok
+test_operational_study_requires_warmup (test_indicators.IndicatorTests.test_operational_study_requires_warmup) ... ok
+test_prefix_is_unchanged_when_future_values_are_appended (test_indicators.IndicatorTests.test_prefix_is_unchanged_when_future_values_are_appended) ... ok
+test_rsi_flat_up_down_conventions (test_indicators.IndicatorTests.test_rsi_flat_up_down_conventions) ... ok
+test_wilder_published_seed (test_indicators.IndicatorTests.test_wilder_published_seed) ... ok
+
+----------------------------------------------------------------------
+Ran 45 tests in 0.149s
+
+OK

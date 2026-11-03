@@ -1,0 +1,19 @@
+{
+  "artifact": "Android HTTPS client source",
+  "version": "0.4.1",
+  "apk_built": false,
+  "android_runtime_tested": false,
+  "blocker": "Android SDK, Gradle and JDK compiler are not available in this environment; dependency downloads are restricted.",
+  "build_command": "gradle --no-daemon :app:assembleDebug",
+  "toolchain": {
+    "agp": "8.9.2",
+    "gradle": "8.11.1",
+    "jdk": 17,
+    "compile_sdk": 35
+  },
+  "expected_output_after_successful_build": "app/build/outputs/apk/debug/app-debug.apk",
+  "debug_ci_prepared": true,
+  "release_ci_prepared": true,
+  "ci_executed": false,
+  "owner_release_key_configured": false
+}

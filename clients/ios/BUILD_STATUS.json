@@ -1,0 +1,16 @@
+{
+  "artifact": "iOS Xcode HTTPS client source",
+  "version": "0.4.1",
+  "ipa_built": false,
+  "signed_for_device": false,
+  "ios_runtime_tested": false,
+  "blockers": [
+    "macOS and Xcode unavailable",
+    "Owner Apple signing identity, provisioning profile and distribution method not configured"
+  ],
+  "minimum_ios": "17.0",
+  "web_app_alternative": "Install the shared HTTPS dashboard from Safari after it is actually hosted.",
+  "simulator_ci_prepared": true,
+  "simulator_ci_executed": false,
+  "simulator_artifact_is_device_ipa": false
+}
