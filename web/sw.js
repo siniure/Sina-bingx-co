@@ -1,5 +1,5 @@
 'use strict';
-const CACHE='sina-oco-shell-v4-1';
+const CACHE='sina-oco-shell-v6';
 const ASSETS=['/','/index.html','/app.css','/app.js','/manifest.webmanifest','/icon.svg','/icon-192.png','/icon-512.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('sina-oco-shell-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));

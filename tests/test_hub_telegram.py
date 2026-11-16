@@ -182,6 +182,17 @@ class TelegramTests(unittest.TestCase):
         self.assertFalse(self.bot.state()['live_signal_publication'])
         self.assertEqual(self.stops,[])
 
+    def test_status_distinguishes_fresh_perpetual_data_from_live_publication(self):
+        self.pair()
+        self.bot.status_callback = lambda: {"state": "PAUSED", "market": {
+            "state": "OBSERVING_PUBLIC_MARKET", "price": "65279.4",
+        }}
+        self.assertEqual(self.bot.process(self.update("/status", update_id=2)), "STATUS")
+        message = self.sent[-1]["text"]
+        self.assertIn("BingX USDT-M Perpetual", message)
+        self.assertIn("Last Price: 65279.4 USDT", message)
+        self.assertIn("انتشار OCO زنده: غیرفعال", message)
+
     def test_wrong_chat_receipt_does_not_verify_delivery(self):
         bad=TelegramAPI('123456789:'+('x'*35),transport=lambda *_:{'ok':True,'result':{'message_id':1,'chat':{'id':999}}})
         self.pair()

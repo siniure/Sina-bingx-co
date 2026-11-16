@@ -1,3 +1,3 @@
-"""BingX Standard OCO research worker. Live publication is deliberately unavailable."""
+"""Product-separated BingX OCO research and public observation worker."""
 
-__version__ = "0.4.1"
+__version__ = "0.6.0"

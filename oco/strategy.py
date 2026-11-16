@@ -11,7 +11,8 @@ from core import GateError, canonical_decimal, decimal
 from indicators import Candle, atr, ema, macd, rsi
 from .market import Market
 
-VERSION = "standard-retest-research-0.1"
+VERSION = "bingx-retest-research-0.2"
+MINIMUM_NET_RR = Decimal("1.50")
 
 
 def number(value) -> Decimal:
@@ -72,10 +73,28 @@ def summarize(bars: list[Candle], current: Decimal) -> dict:
 def analyze(market: Market, settings: dict) -> dict:
     tick = decimal(settings.get("research_tick_size"), "research_tick_size", positive=True)
     minimum = decimal(settings.get("minimum_net_rr"), "minimum_net_rr", positive=True)
-    if settings.get("version") != VERSION or minimum < 1:
+    if settings.get("version") != VERSION or minimum < MINIMUM_NET_RR:
         raise GateError("unsupported research strategy configuration")
+    stop_fraction = decimal(settings.get("stop_buffer_atr_fraction", "0.25"),
+                            "stop_buffer_atr_fraction", positive=True)
+    target_fraction = decimal(settings.get("target_buffer_atr_fraction", "0.10"),
+                              "target_buffer_atr_fraction", positive=True)
+    if stop_fraction > 1 or target_fraction > 1:
+        raise GateError("research ATR buffer fractions must be at most one")
+    binding = {key: market.raw.get(key) for key in ("provider", "product", "symbol", "price_kind")}
+    product_prices = {"standard_futures": "index_price", "perpetual_futures": "last_price"}
+    if (binding["provider"] != "BingX" or binding["product"] not in product_prices
+            or binding["price_kind"] != product_prices[binding["product"]]
+            or binding["symbol"] not in {"BTCUSDT", "BTC-USDT"}):
+        raise GateError("research strategy requires explicit matching product identity")
     summaries = {tf: summarize(bars, market.price) for tf, bars in market.bars.items()}
+    volume_kind = ("unverified_perpetual_volume" if binding["product"] == "perpetual_futures"
+                   else "unverified_optional_index_volume")
+    for summary in summaries.values():
+        summary["volume_kind"] = volume_kind
     result = {"strategy_version": VERSION, "timeframes": summaries, "signal": None,
+              "stage": "RESEARCH_ONLY", "strategy_profitability_validated": False,
+              "maximum_hold_minutes": 120,
               "decision": "NO_ENTRY", "reason": "MULTITIMEFRAME_CONFLICT"}
     dominant = {summaries[tf]["direction"] for tf in ("15m", "1h", "4h", "12h", "1d")}
     if len(dominant) != 1 or "neutral" in dominant:
@@ -123,33 +142,43 @@ def analyze(market: Market, settings: dict) -> dict:
         result["reason"] = "QUOTE_OUTSIDE_ENTRY_RANGE"
         return result
     if direction == "long":
-        sl = quantize(min(number(confirmation.low), level-volatility*Decimal("0.25"))-volatility*Decimal("0.25"), tick, ROUND_FLOOR)
+        structural_stop = min(number(confirmation.low), level)
+        sl = quantize(structural_stop-volatility*stop_fraction, tick, ROUND_FLOOR)
         targets = [number(p) for tf in ("15m", "1h") for p in summaries[tf]["resistances"]
                    if number(p) > entry_max]
         target = min(targets) if targets else None
-        tp = None if target is None else quantize(target-volatility*Decimal("0.10"), tick, ROUND_FLOOR)
+        tp = None if target is None else quantize(target-volatility*target_fraction, tick, ROUND_FLOOR)
     else:
-        sl = quantize(max(number(confirmation.high), level+volatility*Decimal("0.25"))+volatility*Decimal("0.25"), tick, ROUND_CEILING)
+        structural_stop = max(number(confirmation.high), level)
+        sl = quantize(structural_stop+volatility*stop_fraction, tick, ROUND_CEILING)
         targets = [number(p) for tf in ("15m", "1h") for p in summaries[tf]["supports"]
                    if number(p) < entry_min]
         target = max(targets) if targets else None
-        tp = None if target is None else quantize(target+volatility*Decimal("0.10"), tick, ROUND_CEILING)
+        tp = None if target is None else quantize(target+volatility*target_fraction, tick, ROUND_CEILING)
     valid = tp is not None and (0 < sl < entry_min <= entry <= entry_max < tp if direction == "long"
                                  else 0 < tp < entry_min <= entry <= entry_max < sl)
     if not valid:
         result["reason"] = "NO_STRUCTURAL_TARGET_OR_INVALID_PRICE_GEOMETRY"
         return result
     closed_at = confirmation.close_at
-    fingerprint = [VERSION, market.source_id, direction, closed_at.isoformat()]
+    fingerprint = [VERSION, *(binding[key] for key in ("provider", "product", "symbol", "price_kind")),
+                   market.source_id, direction, closed_at.isoformat()]
     # One identity per candle/direction/version, including corrected levels.
     signal_id = hashlib.sha256(json.dumps(fingerprint).encode()).hexdigest()[:24]
-    signal = {"id": signal_id, "direction": direction, "confirmed_at": closed_at.isoformat(),
+    signal = {"id": signal_id, **binding, "direction": direction, "confirmed_at": closed_at.isoformat(),
+              "stage": "RESEARCH_ONLY", "strategy_profitability_validated": False,
+              "maximum_hold_minutes": 120,
               "expires_at": (closed_at+timedelta(minutes=15)).isoformat(),
               "entry_reference": canonical_decimal(entry),
               "entry_range": {"min": canonical_decimal(entry_min), "max": canonical_decimal(entry_max)},
               "sl": canonical_decimal(sl), "tp": canonical_decimal(tp),
               "retest_level": canonical_decimal(level), "structural_target": canonical_decimal(target),
-              "stop_buffer_atr": "0.25", "target_buffer_atr": "0.10", "buffers_applied_once": True,
+              "structural_stop": canonical_decimal(structural_stop),
+              "stop_buffer": canonical_decimal(abs(sl-structural_stop)),
+              "target_level": canonical_decimal(target),
+              "target_buffer": canonical_decimal(abs(tp-target)),
+              "stop_buffer_atr": canonical_decimal(stop_fraction),
+              "target_buffer_atr": canonical_decimal(target_fraction), "buffers_applied_once": True,
               "conditions": ["All five higher timeframes aligned", "5m breakout and closed retest confirmed",
                              "Current quote remains in entry range", "No previous TP/SL touch after confirmation",
                              "Fresh costs and adequate net reward/risk", "Account risk check required before any real entry"]}

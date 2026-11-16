@@ -1,5 +1,6 @@
 """Persian mobile report, always branded as offline research."""
 from datetime import datetime
+from decimal import Decimal, ROUND_DOWN
 from zoneinfo import ZoneInfo
 
 PERSIAN = {"long": "صعودی", "short": "نزولی", "neutral": "خنثی/ناسازگار"}
@@ -27,8 +28,20 @@ def report_fa(result: dict) -> str:
         lines += ["", "نمایش جدول گرد شده است؛ محاسبات از مقدار کامل استفاده می‌کنند.", ""]
     if signal:
         risk = signal["risk"]
+        rate = Decimal(signal["costs"]["worst_net_rr"])
+        if rate >= 4:
+            rate_label = "فوق‌العاده"
+        elif rate >= 3:
+            rate_label = "عالی"
+        elif rate >= 2:
+            rate_label = "خوب"
+        else:
+            rate_label = "متوسط"
+        displayed_rate = rate.quantize(Decimal("0.01"), rounding=ROUND_DOWN)
         lines += [f"جهت پژوهشی: {PERSIAN[signal['direction']]}؛ شناسه: {signal['id']}",
                   f"انقضای طرح: {datetime.fromisoformat(signal['expires_at']).astimezone(ZoneInfo('Europe/Istanbul')).isoformat()}", "",
+                  f"مدت نگهداری فرضی پس از Fill حداکثر {signal.get('maximum_hold_minutes', 120)} دقیقه است.", "",
+                  f"⭐ **Rate {displayed_rate} — {rate_label}**", "",
                   "| کنترل | نتیجهٔ آزمایشی |", "|---|---|",
                   f"| نسبت خالص در بدترین انتهای ورود | {signal['costs']['worst_net_rr']} |",
                   f"| وضعیت ریسک حساب | {risk['status']} |",
@@ -40,12 +53,15 @@ def report_fa(result: dict) -> str:
                   f"| مجموع ریسک حساب و طرح / USDT | {risk.get('aggregate_risk_usdt', 'ناموجود')} |",
                   f"| قیمت جاری بازپخش؛ متمایز از Entry | {result['quote']['price']} |",
                   f"| حجم فرضی / BTC | {risk.get('quantity') or 'ناموجود'} |", "",
-                  "شروط این طرح پژوهشی:", ""]
+                  "❗❗❗ **شرط فعال‌سازی** ❗❗❗", "",
+                  f"قیمت در بازهٔ **{signal['entry_range']['min']}–{signal['entry_range']['max']}** باقی بماند.", ""]
         lines += [f"- {condition}" for condition in [
             "جهت پنج تایم‌فریم بالاتر همسو بماند.", "شکست و بازآزمایی با کندل بسته تأیید شده باشد.",
             "قیمت جاری داخل محدودهٔ ورود بماند.", "از زمان تأیید، TP یا SL لمس نشده باشد.",
             "تازگی داده، هزینه‌ها و ریسک حساب پیش از کاربرد واقعی دوباره کنترل شوند."]]
-        for label, key in (("Entry reference", "entry_reference"), ("SL trigger/price", "sl"), ("TP trigger/price", "tp")):
+        lines += ["", "⛔⛔ **شرط ابطال پلن** ⛔⛔", "",
+                  f"رسیدن قیمت به **{signal['sl']}** یا **{signal['tp']}** پیش از Fill، یا پایان مهلت ورود، طرح را منقضی می‌کند."]
+        for label, key in (("🟦 **Entry**", "entry_reference"), ("🟥 **SL**", "sl"), ("🟩 **TP**", "tp")):
             lines += ["", label, "", "```", signal[key], "```"]
         lines += ["", "لمس قیمت، مدرک پرشدن سفارش یا سود و زیان واقعی نیست."]
     return "\n".join(lines)+"\n"

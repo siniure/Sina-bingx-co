@@ -88,7 +88,7 @@ class Journal:
             raise GateError("trusted local operator required")
         command = normalize_command(command)
         if command == START:
-            raise GateError("LIVE_BLOCKED: verified Standard feed, host, delivery and user approval are required; live activation is not implemented")
+            raise GateError("LIVE_BLOCKED: verified product feed, account, costs, strategy, host and delivery are required; live activation is not implemented")
         if command not in {"paper-start", STOP}:
             raise GateError("exact paper-start or standalone stop command required")
         with self.transaction() as connection:

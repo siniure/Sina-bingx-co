@@ -184,7 +184,9 @@ def validate_proposal(proposal: dict, ready: dict, now: datetime) -> dict:
     funding = decimal(costs.get("funding_reserve_per_unit"), "funding_reserve_per_unit")
     cost = entry*fee_rate + execution + funding
     net_reward, net_loss = reward-cost, loss+cost
-    minimum_rr = decimal(ready.get("minimum_net_rr", "2"), "minimum_net_rr", positive=True)
+    minimum_rr = decimal(ready.get("minimum_net_rr", "1.50"), "minimum_net_rr", positive=True)
+    if minimum_rr < Decimal("1.50"):
+        raise GateError("minimum net reward/risk cannot be below the agreed 1.50")
     if net_reward <= 0 or net_reward/net_loss < minimum_rr:
         raise GateError("net reward/risk after costs is below configured minimum")
     worst_entry = entry_min if direction == "short" else entry_max

@@ -11,18 +11,27 @@ from indicators import Candle, CandleError, validate_closed_bars
 
 IDENTITY = {"provider": "BingX", "product": "standard_futures",
             "symbol": "BTCUSDT", "price_kind": "index_price"}
+PRODUCT_IDENTITIES = {
+    "standard_futures": IDENTITY,
+    "perpetual_futures": {"provider": "BingX", "product": "perpetual_futures",
+                          "symbol": "BTCUSDT", "price_kind": "last_price"},
+}
 TIMEFRAMES = {"5m": 300, "15m": 900, "1h": 3600,
               "4h": 14400, "12h": 43200, "1d": 86400}
 
 
-def identity(record: dict, name: str, *, price_kind: bool = True) -> None:
+def identity(record: dict, name: str, *, price_kind: bool = True,
+             expected: dict | None = None) -> None:
     if not isinstance(record, dict):
         raise GateError(f"{name}: object required")
-    for key, expected in IDENTITY.items():
+    required = IDENTITY if expected is None else expected
+    if required not in PRODUCT_IDENTITIES.values():
+        raise GateError(f"{name}: unsupported product identity")
+    for key, value in required.items():
         if key == "price_kind" and not price_kind:
             continue
-        if record.get(key) != expected:
-            raise GateError(f"{name}: wrong {key}; expected {expected}")
+        if record.get(key) != value:
+            raise GateError(f"{name}: wrong {key}; expected {value}")
 
 
 def fresh(value: Any, now: datetime, name: str, seconds: int = 15) -> datetime:
@@ -42,13 +51,24 @@ class Market:
     bars: dict[str, list[Candle]]
     raw: dict
 
+    @property
+    def identity(self) -> dict:
+        return {key: self.raw[key] for key in IDENTITY}
 
-def parse_market(payload: dict, now: datetime | None = None) -> Market:
+
+def parse_market(payload: dict, now: datetime | None = None, *,
+                 allow_live_observation: bool = False) -> Market:
     if not isinstance(payload, dict) or type(payload.get("schema_version")) is not int or payload["schema_version"] != 2:
         raise GateError("snapshot schema_version=2 required")
-    if payload.get("data_mode") not in {"synthetic", "recorded_replay"}:
+    modes = {"synthetic", "recorded_replay"}
+    if allow_live_observation:
+        modes.add("live_observation")
+    if payload.get("data_mode") not in modes:
         raise GateError("only synthetic/recorded_replay inputs are implemented; live input blocked")
-    identity(payload, "snapshot")
+    expected = PRODUCT_IDENTITIES.get(payload.get("product"))
+    if expected is None:
+        raise GateError("unsupported market product")
+    identity(payload, "snapshot", expected=expected)
     as_of = time_value(payload.get("as_of"), "as_of")
     if now is not None and as_of != clock_value(now):
         raise GateError("snapshot as_of must match replay clock")
@@ -56,7 +76,7 @@ def parse_market(payload: dict, now: datetime | None = None) -> Market:
     if not isinstance(source_id, str) or not source_id.strip():
         raise GateError("source_id required")
     quote = payload.get("quote")
-    identity(quote, "quote")
+    identity(quote, "quote", expected=expected)
     if quote.get("source_id") != source_id or quote.get("timestamp_kind") != "exchange_event":
         raise GateError("quote: matching source and exchange event timestamp required")
     event_at = fresh(quote.get("event_at"), as_of, "quote event_at")
@@ -70,14 +90,19 @@ def parse_market(payload: dict, now: datetime | None = None) -> Market:
         raise GateError("all six exact timeframes required")
     for tf, seconds in TIMEFRAMES.items():
         history = histories[tf]
-        identity(history, f"history {tf}")
+        identity(history, f"history {tf}", expected=expected)
         if history.get("source_id") != source_id:
             raise GateError(f"history {tf}: source changed")
         # The adapter supplies the actual exchange boundary origin, never a local timezone guess.
         origin = time_value(history.get("origin_at"), f"{tf} origin_at")
         fresh(history.get("observed_at"), as_of, f"{tf} observed_at")
+        raw_bars = history.get("bars")
+        if isinstance(raw_bars, (list, tuple)):
+            for row in raw_bars:
+                if isinstance(row, dict):
+                    identity({**expected, **row}, f"{tf} candle", expected=expected)
         try:
-            candles = validate_closed_bars(history.get("bars"), seconds, as_of)
+            candles = validate_closed_bars(raw_bars, seconds, as_of)
         except CandleError as exc:
             raise GateError(f"{tf}: {exc}") from exc
         if not 400 <= len(candles) <= 10000:
@@ -108,6 +133,7 @@ def check_quote_path(market: Market, signal: dict) -> None:
     for point in path:
         if not isinstance(point, dict) or point.get("source_id") != market.source_id:
             raise GateError("quote path: source mismatch")
+        identity({**market.identity, **point}, "quote path", expected=market.identity)
         event = time_value(point.get("event_at"), "path event_at")
         seq = point.get("sequence")
         if type(seq) is not int or seq < 0:

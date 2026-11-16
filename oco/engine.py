@@ -4,12 +4,12 @@ from __future__ import annotations
 from decimal import Decimal
 
 from core import GateError
-from .market import parse_market, check_quote_path, IDENTITY
+from .market import parse_market, check_quote_path
 from .risk import costs_for, size_research
 from .strategy import analyze, VERSION
 
 
-def evaluate(snapshot: dict, settings: dict) -> dict:
+def evaluate(snapshot: dict, settings: dict, *, allow_live_observation=False) -> dict:
     result = {"schema_version": 1, "mode": "REPLAY_ONLY", "status": "BLOCKED",
               "decision": "NO_ENTRY", "signal": None, "strategy_version": VERSION,
               "source_authenticated": False, "strategy_profitability_validated": False,
@@ -17,13 +17,15 @@ def evaluate(snapshot: dict, settings: dict) -> dict:
               "exchange_orders_submitted": False, "position_or_fill_inferred": False,
               "live_activation_available": False}
     try:
-        market = parse_market(snapshot)
-        result.update(IDENTITY)
+        market = parse_market(snapshot, allow_live_observation=allow_live_observation)
+        result.update(market.identity)
+        if market.data_mode == "live_observation":
+            result["mode"] = "LIVE_OBSERVATION_RESEARCH"
         result.update(as_of=market.as_of.isoformat(), source_id=market.source_id, data_mode=market.data_mode,
                       quote={"price": str(market.price), "event_at": market.event_at.isoformat()})
         analysis = analyze(market, settings)
         result.update(analysis)
-        result["status"] = "SIMULATED"
+        result["status"] = "OBSERVED" if market.data_mode == "live_observation" else "SIMULATED"
         signal = analysis["signal"]
         if signal is None:
             return result
@@ -32,10 +34,12 @@ def evaluate(snapshot: dict, settings: dict) -> dict:
         except GateError:
             result["cancelled_signal_id"] = signal["id"]
             raise
-        costs = costs_for(signal, snapshot.get("costs"), market.as_of, Decimal(settings["minimum_net_rr"]))
+        costs = costs_for(signal, snapshot.get("costs"), market.as_of,
+                          Decimal(settings["minimum_net_rr"]), expected_identity=market.identity)
         signal["costs"] = costs
         try:
-            risk = size_research(signal, costs, snapshot.get("account"), settings, market.as_of)
+            risk = size_research(signal, costs, snapshot.get("account"), settings,
+                                 market.as_of, expected_identity=market.identity)
         except GateError as exc:
             # Chart proposals may exist without a safe account-sized quantity.
             risk = {"status": "ACCOUNT_RISK_BLOCKED", "quantity": None, "reason": str(exc)}

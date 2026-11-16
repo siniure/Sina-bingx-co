@@ -17,18 +17,16 @@
 <body>
 <main class="shell">
   <header class="topbar">
-    <a class="brand" href="#"><span class="brand-mark" aria-hidden="true">S</span><span dir="ltr">SINA <b>OCO</b><small>STANDARD FUTURES · BTCUSDT</small></span></a>
+    <a class="brand" href="#"><span class="brand-mark" aria-hidden="true">S</span><span dir="ltr">SINA <b>OCO</b><small>USDT-M PERPETUAL · BTC-USDT</small></span></a>
     <span class="connection" id="connection">بدون اتصال</span>
   </header>
   <section class="intro">
-    <p class="eyebrow">کنترل مجدد و بازبینی؛ توافق ما؛ قابل کپی</p>
-    <div class="intro-row"><h1>مرکز پایش سینا</h1><span class="version">v0.4 · پژوهشی</span></div>
-    <p class="muted">پیشنهادهای یک سرور مشترک، با زمان منبع و وضعیت مشخص.</p>
+    <div class="intro-row"><h1>مرکز پایش سینا</h1><span class="version">v0.6</span></div>
   </section>
-  <section class="notice" aria-label="وضعیت انتشار"><span class="notice-dot" aria-hidden="true"></span><div><strong>انتشار زنده غیرفعال است</strong><p>دریافت معتبر Standard و فعال‌سازی نهایی هنوز تأیید نشده‌اند.</p></div></section>
+  <section class="notice" aria-label="وضعیت انتشار"><span class="notice-dot" aria-hidden="true"></span><div><strong>انتشار زندهٔ OCO غیرفعال است</strong><p>قیمت و تحلیل کندل‌های بسته پس از دریافت از BingX نمایش داده می‌شوند.</p></div></section>
   <section class="metrics" aria-label="وضعیت سامانه">
     <article><span>وضعیت سامانه</span><strong id="mode">متوقف</strong><small id="mode-detail">در انتظار اتصال سرور</small></article>
-    <article><span>Index Price معتبر</span><strong id="price">—</strong><small id="price-time">دادهٔ زنده در دسترس نیست</small></article>
+    <article><span>آخرین قیمت معامله (Last Price)</span><strong id="price" dir="ltr">—</strong><small id="price-time">دادهٔ زنده در دسترس نیست</small></article>
     <article><span>مسیر تلگرام</span><strong id="telegram-state">متصل نیست</strong><small id="telegram-detail">اتصال مقصد باید تأیید شود</small></article>
   </section>
   <section class="panel" aria-labelledby="connect-title">
@@ -44,17 +42,17 @@
   <section class="panel" aria-labelledby="decision-title">
     <div class="section-heading"><h2 id="decision-title">آخرین ارزیابی</h2><label class="file-button">بازکردن گزارش JSON<input id="import-file" type="file" accept="application/json,.json"></label></div>
     <div class="decision-row"><strong id="decision">فعلاً ورود ندارد</strong><span id="data-label" class="muted">داده‌ای دریافت نشده</span></div>
-    <p id="reason" class="muted">نمایش ساعت دستگاه به‌معنی دریافت قیمت زنده نیست.</p>
+    <p id="reason" class="muted"></p>
     <div id="levels" class="levels" hidden></div>
-    <div class="table-wrap" id="tf-wrap" hidden><table><thead><tr><th>تایم‌فریم</th><th>جهت</th><th>RSI14 / RSI24</th><th>ATR14</th></tr></thead><tbody id="timeframes"></tbody></table></div>
+    <div class="table-wrap" id="tf-wrap" hidden><table><thead><tr><th>تایم‌فریم</th><th>جهت</th><th>RSI14 / RSI24</th><th>ATR14</th><th>MACD Histogram</th></tr></thead><tbody id="timeframes"></tbody></table></div>
   </section>
   <section class="panel" aria-labelledby="archive-title"><div class="section-heading"><h2 id="archive-title">آرشیو پیشنهادها</h2><span class="muted" id="record-count">بدون رکورد</span></div><div id="records" class="empty">پس از اتصال، رکوردهای مستقل اینجا نمایش داده می‌شوند.</div></section>
   <section class="panel" aria-labelledby="controls-title">
     <div class="section-heading"><h2 id="controls-title">کنترل و تلگرام</h2><span class="muted">نیازمند کلید کنترل</span></div>
-    <div class="actions"><button id="stop" class="danger" type="button" disabled>توقف سامانه</button><button id="pair" type="button" disabled>اتصال تلگرام خودم</button><button id="test-telegram" class="quiet" type="button" disabled>آزمون پیام غیرمعاملاتی</button></div>
-    <p id="pair-result" role="status"></p><p class="muted">توقف، صف همین سامانه را متوقف می‌کند. پوزیشن‌ها و سفارش‌های صرافی تغییر نمی‌کنند.</p>
+    <div class="actions"><button id="stop" class="danger" type="button" disabled>توقف پایش</button><button id="resume" type="button" hidden>ازسرگیری پایش بازار</button><button id="pair" type="button" disabled>اتصال تلگرام خودم</button><button id="test-telegram" class="quiet" type="button" disabled>آزمون پیام غیرمعاملاتی</button></div>
+    <p id="pair-result" role="status"></p>
   </section>
-  <footer><span dir="ltr">SINA OCO · BTCUSDT STANDARD INDEX</span><span>زمان گزارش‌ها: استانبول · UTC+3</span></footer>
+  <footer><span dir="ltr">BINGX · BTC-USDT · LAST PRICE</span><span>زمان گزارش‌ها · استانبول</span></footer>
 </main>
 </body>
 </html>

@@ -283,7 +283,7 @@ class OwnerBot:
             self.stop_callback()
             self._send(owner, "سامانه متوقف شد. این فرمان هیچ سفارش یا پوزیشن صرافی را تغییر نمی‌دهد.")
         elif action == "LIVE_BLOCKED":
-            self._send(owner, "آماده فعال‌سازی زنده نیست. منبع Standard، آزمون واقعی و هماهنگی نهایی هنوز لازم است.")
+            self._send(owner, "انتشار زنده آماده نیست. اتصال معتبر محصول انتخاب‌شده، حساب، هزینه‌ها، اعتبارسنجی راهبرد و تحویل آزمایشی باید تکمیل شوند.")
         elif action == "CHANNEL_PICKER":
             self._offer_channel_picker(owner, request_id)
         elif action in {"CHANNEL_SHARED", "CHANNEL_TEST"}:
@@ -296,7 +296,17 @@ class OwnerBot:
                 channel_status = "رسید آزمون تأیید شد"
             elif channel["channel_paired"]:
                 channel_status = "انتخاب شد، منتظر آزمون"
-            self._send(owner, "OCO سینا\nوضعیت: "+status["state"]+"\nانتشار زنده: غیرفعال\nداده بازار متصل و تأییدشده: خیر"
+            market = status.get("market")
+            if market is None:
+                market_status = "وضعیت: "+status["state"]+"\nدادهٔ زندهٔ بازار: در دسترس نیست"
+            else:
+                states = {"PAUSED": "پایش متوقف است", "WAITING_FOR_PRICE": "در انتظار قیمت تازه",
+                          "WAITING_FOR_CANDLES": "قیمت متصل است؛ در انتظار کندل‌های بسته",
+                          "OBSERVING_PUBLIC_MARKET": "قیمت متصل است؛ شش تایم‌فریم آماده‌اند"}
+                market_status = "BingX USDT-M Perpetual · BTC-USDT\n"+states[market["state"]]
+                if "price" in market:
+                    market_status += "\nLast Price: "+market["price"]+" USDT"
+            self._send(owner, "OCO سینا\n"+market_status+"\nانتشار OCO زنده: غیرفعال"
                        +"\nکانال: "+channel_status+"\n/channel برای انتخاب کانال، /channel_test برای آزمون")
         return action
 

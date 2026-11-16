@@ -1,4 +1,4 @@
-"""Authenticated local/cloud dashboard API. All market use remains replay-only."""
+"""Authenticated dashboard for replay and public Perpetual market observation."""
 from __future__ import annotations
 
 import argparse
@@ -19,6 +19,8 @@ from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from core import GateError, START, STOP, time_value
 from . import __version__
+from .collector import PUBLICATION_BLOCKERS
+from .perpetual_monitor import PerpetualMonitor
 from .service import Service, load_json, MAX_SNAPSHOT_BYTES
 from .telegram_bot import TelegramAPI, OwnerBot, TelegramFailure
 
@@ -26,15 +28,18 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class Hub:
-    def __init__(self, directory, *, view_token, control_token, settings=None, telegram_api=None):
+    def __init__(self, directory, *, view_token, control_token, settings=None, telegram_api=None,
+                 perpetual=False):
         if (not self.valid_token(view_token) or not self.valid_token(control_token) or
                 hmac.compare_digest(view_token, control_token)):
             raise GateError("two distinct securely configured tokens of at least 32 characters required")
         self._view_token, self._control_token = view_token, control_token
         self.lock = threading.RLock()
-        self.service = Service(directory, settings or load_json(ROOT/"config/strategy.research.json"))
+        settings = settings or load_json(ROOT/"config/strategy.research.json")
+        self.service = Service(directory, settings)
         # A restarted host always requires a new explicit paper-start.
         self.service.control(STOP)
+        self.market = PerpetualMonitor(directory, settings) if perpetual else None
         self.bot = OwnerBot(self.service.journal, telegram_api, self.status, self.stop) if telegram_api else None
 
     @staticmethod
@@ -52,18 +57,34 @@ class Hub:
     def status(self):
         self.service.journal.expire_pending()
         state = self.service.journal.status()
-        return {**state, "version": __version__, "product": "BingX Standard Futures / Index",
+        result = {**state, "version": __version__, "product": "BingX Standard Futures / Index",
                 "symbol": "BTCUSDT", "server_observed_at": datetime.now(timezone.utc).isoformat(),
                 "market_source_verified": False, "mode": "REPLAY_ONLY",
                 "telegram": self.bot.state() if self.bot else {"configured": False, "owner_paired": False, "delivery_verified": False},
                 "activation_blockers": ["Verified Standard Index feed and OHLC", "Real-feed and out-of-sample validation",
                                         "Current complete account risk and fee evidence", "Independent final user activation"]}
+        if self.market is not None:
+            result.update(product="BingX USDT-M Perpetual / Last Price", mode="LIVE_OBSERVATION_RESEARCH",
+                          market=self.market.status(),
+                          activation_blockers=[*PUBLICATION_BLOCKERS, "Independent final user activation"])
+        return result
 
     def stop(self):
         with self.lock:
+            if self.market is not None:
+                self.market.set_paused(True)
             return self.service.control(STOP)
 
+    def resume_observation(self):
+        with self.lock:
+            if self.market is None:
+                raise GateError("Perpetual monitoring is not configured")
+            self.market.set_paused(False)
+            return self.status()
+
     def latest(self):
+        if self.market is not None:
+            return self.market.latest()
         with self.lock:
             self.service.journal.expire_pending()
             path = self.service.directory/"latest_evaluation.json"
@@ -196,8 +217,12 @@ def handler_for(hub, web_root=ROOT/"web", *, trust_https_proxy=False):
                     raise GateError("empty JSON object required for control")
                 if path == "/api/control/stop":
                     response = hub.stop()
+                elif path == "/api/control/resume-observation":
+                    response = hub.resume_observation()
                 elif path == "/api/control/paper-start":
                     with hub.lock:
+                        if hub.market is not None:
+                            raise GateError("paper replay requires a separate replay input")
                         response = hub.service.control("paper-start")
                 elif path == "/api/control/live-start":
                     self._send(423, {"error": "LIVE_PUBLICATION_BLOCKED", "exchange_orders_submitted": False})
@@ -212,7 +237,7 @@ def handler_for(hub, web_root=ROOT/"web", *, trust_https_proxy=False):
                 self._send(200, response)
             except TelegramFailure as exc:
                 self._send(409, {"error": exc.code, "retry_after_seconds": exc.retry_after})
-            except (ValueError, GateError):
+            except (ValueError, GateError, OSError):
                 self._send(409, {"error": "CONTROL_UNAVAILABLE_OR_INVALID_INPUT"})
 
     return Handler
@@ -231,7 +256,9 @@ def main(argv=None):
     parser.add_argument("--data-dir", type=Path, default=Path("runtime"))
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=port_number, default=os.environ.get("PORT", "8765"))
-    parser.add_argument("--snapshot", type=Path)
+    input_mode = parser.add_mutually_exclusive_group()
+    input_mode.add_argument("--snapshot", type=Path)
+    input_mode.add_argument("--perpetual", action="store_true")
     parser.add_argument("--telegram", action="store_true")
     parser.add_argument("--trust-https-proxy", action="store_true")
     args = parser.parse_args(argv)
@@ -239,7 +266,8 @@ def main(argv=None):
         ZoneInfo('Europe/Istanbul')
         api = TelegramAPI(os.environ.get("TELEGRAM_BOT_TOKEN", "")) if args.telegram else None
         hub = Hub(args.data_dir, view_token=os.environ.get("SINA_OCO_VIEW_TOKEN", ""),
-                  control_token=os.environ.get("SINA_OCO_CONTROL_TOKEN", ""), telegram_api=api)
+                  control_token=os.environ.get("SINA_OCO_CONTROL_TOKEN", ""), telegram_api=api,
+                  perpetual=args.perpetual)
         server = Server((args.host, args.port), handler_for(hub, trust_https_proxy=args.trust_https_proxy))
     except ZoneInfoNotFoundError:
         print('Hub not started: Europe/Istanbul timezone data is unavailable. Install tzdata in this Python environment.')
@@ -267,7 +295,11 @@ def main(argv=None):
                 stop.wait(exc.retry_after)
             except (OSError, ValueError):
                 stop.wait(5)
-    threads = [threading.Thread(target=background, daemon=True)]
+    threads = []
+    if hub.market is not None:
+        threads.append(threading.Thread(target=hub.market.run, args=(stop,), daemon=True))
+    elif args.snapshot:
+        threads.append(threading.Thread(target=background, daemon=True))
     if hub.bot:
         threads.append(threading.Thread(target=telegram_loop, daemon=True))
     for thread in threads:
@@ -278,11 +310,11 @@ def main(argv=None):
     for sig in (signal.SIGINT, signal.SIGTERM):
         signal.signal(sig, shutdown)
     try:
-        print("Sina OCO hub ready; market publication remains blocked.", flush=True)
+        print("Sina OCO hub ready. OCO publication is disabled.", flush=True)
         server.serve_forever(poll_interval=0.5)
     finally:
         stop.set()
-        hub.stop()
+        hub.service.control(STOP)
         server.server_close()
         for thread in threads:
             thread.join(timeout=26)

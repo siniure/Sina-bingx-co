@@ -1,7 +1,8 @@
 {
-  "version": "standard-retest-research-0.1",
+  "version": "bingx-retest-research-0.2",
   "research_tick_size": "0.1",
-  "minimum_net_rr": "2",
+  "minimum_net_rr": "1.50",
+  "stop_buffer_atr_fraction": "0.25",
   "risk_fraction": "0.005",
   "aggregate_risk_fraction": "0.005",
   "maximum_agreed_risk_fraction": "0.2",

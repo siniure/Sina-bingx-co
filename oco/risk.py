@@ -21,10 +21,14 @@ def risk_score(fraction: Decimal) -> Decimal:
     raise AssertionError("unreachable")
 
 
-def costs_for(signal: dict, record: dict, now, minimum_rr: Decimal) -> dict:
+def costs_for(signal: dict, record: dict, now, minimum_rr: Decimal = D("1.50"),
+              *, expected_identity: dict | None = None) -> dict:
+    minimum_rr = decimal(minimum_rr, "minimum net reward/risk", positive=True)
+    if minimum_rr < D("1.50"):
+        raise GateError("minimum net reward/risk cannot be below agreed 1.50")
     if not isinstance(record, dict):
         raise GateError("current product costs unavailable")
-    identity(record, "costs", price_kind=False)
+    identity(record, "costs", price_kind=False, expected=expected_identity)
     verified_window(record, now, 3600, "costs")
     if not isinstance(record.get("evidence"), str) or not record["evidence"].strip():
         raise GateError("cost evidence required")
@@ -36,10 +40,10 @@ def costs_for(signal: dict, record: dict, now, minimum_rr: Decimal) -> dict:
         raise GateError("zero fees require evidence")
     reserves = sum((decimal(record.get(key), key) for key in
                     ("execution_reserve_per_unit", "funding_reserve_per_unit")), D(0))
-    entry, sl, tp = (D(signal[key]) for key in ("entry_reference", "sl", "tp"))
-    lo, hi = (D(signal["entry_range"][key]) for key in ("min", "max"))
-    if not all(value.is_finite() and value > 0 for value in (entry, sl, tp, lo, hi)):
-        raise GateError("positive finite order prices required")
+    entry, sl, tp = (decimal(signal[key], key, positive=True)
+                     for key in ("entry_reference", "sl", "tp"))
+    lo, hi = (decimal(signal["entry_range"][key], f"entry_range {key}", positive=True)
+              for key in ("min", "max"))
     valid = (sl < lo <= entry <= hi < tp if signal["direction"] == "long" else
              tp < lo <= entry <= hi < sl if signal["direction"] == "short" else False)
     if not valid:
@@ -57,7 +61,7 @@ def costs_for(signal: dict, record: dict, now, minimum_rr: Decimal) -> dict:
 
     loss, reward, ratio, stop_cost, target_cost = net(entry)
     worst_loss, worst_reward, worst_ratio, _, _ = net(worst)
-    if min(ratio, worst_ratio) < minimum_rr:
+    if reward < minimum_rr*loss or worst_reward < minimum_rr*worst_loss:
         raise GateError("net reward/risk below minimum at reference or worst entry bound")
     return {"net_loss_per_unit": canonical_decimal(loss), "net_reward_per_unit": canonical_decimal(reward),
             "net_rr": canonical_decimal(ratio), "worst_net_rr": canonical_decimal(worst_ratio),
@@ -68,11 +72,12 @@ def costs_for(signal: dict, record: dict, now, minimum_rr: Decimal) -> dict:
             "cost_evidence": record["evidence"], "verified_at": record["verified_at"]}
 
 
-def size_research(signal: dict, costs: dict, account: dict | None, settings: dict, now) -> dict:
+def size_research(signal: dict, costs: dict, account: dict | None, settings: dict, now,
+                  *, expected_identity: dict | None = None) -> dict:
     if account is None:
         return {"status": "ACCOUNT_RISK_UNAVAILABLE", "quantity": None,
-                "reason": "Fresh complete Standard account risk snapshot required"}
-    identity(account, "account", price_kind=False)
+                "reason": "Fresh complete selected-product account risk snapshot required"}
+    identity(account, "account", price_kind=False, expected=expected_identity)
     fresh(account.get("as_of"), now, "account as_of")
     if account.get("coverage_complete") is not True:
         raise GateError("account risk coverage incomplete")
@@ -89,6 +94,10 @@ def size_research(signal: dict, costs: dict, account: dict | None, settings: dic
     for exposure in exposures:
         if not isinstance(exposure, dict) or exposure.get("kind") not in {"position", "entry_order"}:
             raise GateError("invalid exposure")
+        # Older replay rows inherit the complete parent account identity. Rows
+        # with explicit identity must bind to the same selected product.
+        if any(field in exposure for field in ("provider", "product", "symbol")):
+            identity(exposure, "exposure", price_kind=False, expected=expected_identity)
         reference = exposure.get("id")
         if not isinstance(reference, str) or not reference or reference in identifiers:
             raise GateError("unique exposure identity required")
